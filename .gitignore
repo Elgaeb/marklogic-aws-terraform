@@ -1,0 +1,6 @@
+.*
+!.gitignore
+terraform.tfvars
+backend.tf
+*.tfstate*
+*.iml
