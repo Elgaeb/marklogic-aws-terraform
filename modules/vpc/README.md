@@ -25,16 +25,3 @@ Configuration
     * The CIDR blocks to use for the public subnet(s). This must be the same length as
       number_of_zones
 
-Example terraform.tfvars
-------------------------
-```
-access_key = "..."
-secret_key = "..."
-key_name = "aha_marklogic_consolidation"
-
-vpc_name = "marklogic-edw-dev"
-
-region          = "us-east-1"
-azs             = [ "us-east-1a", "us-east-1b", "us-east-1c" ]
-number_of_zones = 3
-```
