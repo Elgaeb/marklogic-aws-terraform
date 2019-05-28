@@ -16,11 +16,11 @@ licensee     = "none"
 licensee_key = "none"
 
 instance_type      = "r5.4xlarge"
-volume_size        = 350
+volume_size        = 500
 
 expose_administration_console = false
 
-bastion_instance_type = "t3.nano"
+bastion_instance_type = "t3.small"
 bastion_key_name   = "ssh_key_name"
 
 ingestion_instance_type = "c5.4xlarge"

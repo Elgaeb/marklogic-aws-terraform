@@ -10,51 +10,7 @@ of instances per availability zone.
 
 Licensing, either Essential Enterprise or BYOL is also configurable.
 
-Instances in the autoscaling group will be configured using
-[ansible-pull](https://docs.ansible.com/ansible/2.4/ansible-pull.html). The instance will
-install ansible, then call ansible-pull using the Git repository located at
-`ansible_pull_url` using the branch/tag `ansible_pull_branch`. It will use the playbook
-`ansible_playbook_file` and the inventory file `ansible_inventory_file`, which should
-be inside of the Git checkout.
-
-Authentication to the Git repository is done using the bootstrap paradigm.
-The authentication key is first copied from S3 at `ansible_git_ssh_key` and
-then used to authenticate against the Git repository. This prevents the need
-to store plaintext passwords, and the keys can be managed outside of source
-control. 
-
-The commands used to run ansible-pull are
-```bash
-# Copy the git keys from S3
-aws s3 cp ${ansible_git_ssh_key} /root/.ssh/aha_marklogic_bitbucket_rsa
-chmod 400 /root/.ssh/aha_marklogic_bitbucket_rsa
-
-# Run the ansible playbook using ansible-pull
-ansible-pull \
-    -d /root/playbooks \
-    -i /root/playbooks/${ansible_inventory_file} \
-    -U ${ansible_pull_url} \
-    -C ${ansible_pull_branch} \
-    --accept-host-key \
-    --private-key=/root/.ssh/aha_marklogic_bitbucket_rsa \
-    ${ansible_playbook_file}
-```
-
-The inventory file should define settings for `localhost`, e.g.:
-
-```
-[enodes]
-localhost
-
-[dev]
-localhost
-
-[ec2]
-localhost
-``` 
-
 ## Variables
-
 
 ### Required Variables
 
