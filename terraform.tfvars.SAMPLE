@@ -1,0 +1,30 @@
+access_key         = ""
+secret_key         = ""
+
+key_name           = "ssh_key_name"
+
+cluster_name   = "cbp-marklogic"
+cluster_id     = "C344EEE9-421D-4F4C-88FA-7C78B8407EF6"
+
+aws_region      = "us-east-1"
+azs             = ["us-east-1a","us-east-1b","us-east-1c",]
+number_of_zones = 3
+nodes_per_zone  = 3
+
+marklogic_version = "9.0-9.1"
+licensee     = "none"
+licensee_key = "none"
+
+instance_type      = "r5.4xlarge"
+volume_size        = 350
+
+expose_administration_console = false
+
+bastion_instance_type = "t3.nano"
+bastion_key_name   = "ssh_key_name"
+
+ingestion_instance_type = "c5.4xlarge"
+ingestion_key_name = "ssh_key_name"
+ingestion_volume_size = 500
+ingestion_volume_type = "gp2"
+ingestion_ebs_encrypted = false
