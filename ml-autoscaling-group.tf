@@ -79,7 +79,7 @@ resource "aws_autoscaling_group" "marklogic_server_group" {
 
   depends_on = [
     "aws_dynamodb_table.marklogic_ddb_table",
-    "aws_cloudformation_stack.managed_eni_stack",
+//    "aws_cloudformation_stack.managed_eni_stack",
     "aws_lambda_function.node_manager_function",
     "aws_lambda_permission.node_manager_invoke_permission",
   ]
@@ -88,7 +88,6 @@ resource "aws_autoscaling_group" "marklogic_server_group" {
 
   vpc_zone_identifier = [
     "${element(module.vpc.private_subnet_ids, count.index)}",
-//    "${element(var.private_subnet_ids, count.index)}",
   ]
 
   min_size                  = 0
@@ -103,22 +102,25 @@ resource "aws_autoscaling_group" "marklogic_server_group" {
     "${aws_elb.internal_elastic_load_balancer.name}",
   ]
 
-//  target_group_arns = [
-//    "${aws_lb_target_group.coding_clinic_lb_target_group.arn}",
-//    "${aws_lb_target_group.data_dictionary_lb_target_group.arn}"
-//  ]
-
   launch_configuration = "${element(aws_launch_configuration.launch_configuration.*.name, count.index)}"
+
+  initial_lifecycle_hook {
+    lifecycle_transition = "autoscaling:EC2_INSTANCE_LAUNCHING"
+    name = "NodeManager"
+    heartbeat_timeout = 4800
+    notification_target_arn = "${aws_sns_topic.node_manager_sns_topic.0.arn}"
+    role_arn = "${aws_iam_role.node_manager_exec_role.0.arn}"
+  }
 
   tag {
     key                 = "marklogic:stack:name"
-    value               = "${var.cluster_id}"
+    value               = "${var.cluster_name}"
     propagate_at_launch = true
   }
 
   tag {
     key                 = "marklogic:stack:id"
-    value               = "${var.cluster_name}"
+    value               = "${var.cluster_id}"
     propagate_at_launch = true
   }
 
@@ -129,21 +131,20 @@ resource "aws_autoscaling_group" "marklogic_server_group" {
   }
 }
 
-resource "aws_autoscaling_notification" "marklogic_server_group_notification" {
-  count = "${(var.enable_marklogic ? 1 : 0) * (var.log_sns_arn == "" ? 0 : 1)}"
 
-  group_names = [
-    "${aws_autoscaling_group.marklogic_server_group.*.name}",
-  ]
+resource "aws_autoscaling_notification" "marklogic_server_group_notification" {
+  count = "${var.enable_marklogic ? 1 : 0}"
+
+  group_names = "${aws_autoscaling_group.marklogic_server_group.*.name}"
 
   notifications = [
     "autoscaling:EC2_INSTANCE_LAUNCH",
-    "autoscaling:EC2_INSTANCE_LAUNCH_ERROR",
     "autoscaling:EC2_INSTANCE_TERMINATE",
+    "autoscaling:EC2_INSTANCE_LAUNCH_ERROR",
     "autoscaling:EC2_INSTANCE_TERMINATE_ERROR",
   ]
 
-  topic_arn = "${var.log_sns_arn}"
+  topic_arn = "${aws_sns_topic.node_manager_sns_topic.0.arn}"
 }
 
 // </editor-fold>

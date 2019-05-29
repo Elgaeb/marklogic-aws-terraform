@@ -1,3 +1,26 @@
+locals {
+  eni_tag_prefix = "${var.cluster_name}-${md5(var.cluster_id)}_"
+}
+
+resource "aws_network_interface" "managed_eni" {
+  count = "${var.number_of_zones * var.nodes_per_zone}"
+
+  subnet_id = "${element(module.vpc.private_subnet_ids, count.index % var.number_of_zones)}"
+  security_groups = [ "${aws_security_group.instance_security_group.id}" ]
+
+  tags = {
+    "cluster-eni-id" = "${local.eni_tag_prefix}${count.index}"
+  }
+}
+
+output "managed_eni_private_ips" {
+  value = "${aws_network_interface.managed_eni.*.private_ip}"
+}
+
+output "managed_eni_private_dns" {
+  value = "${aws_network_interface.managed_eni.*.private_dns_name}"
+}
+
 data "aws_iam_policy_document" "node_manager_exec_assume_role_policy" {
   statement {
     actions = ["sts:AssumeRole"]
@@ -78,10 +101,15 @@ resource "aws_iam_role_policy_attachment" "node_manager_policy_attachment" {
 resource "aws_lambda_function" "node_manager_function" {
   count = "${var.enable_marklogic ? 1 : 0}"
 
+  depends_on = [
+    "aws_network_interface.managed_eni"
+  ]
+
   function_name = "${var.cluster_name}-node_manager_function"
 
-  s3_bucket = "${var.lambda_package_bucket_base}${var.aws_region}"
-  s3_key    = "${var.s3_directory_base}/node_manager.zip"
+//  s3_bucket = "${var.lambda_package_bucket_base}${var.aws_region}"
+//  s3_key    = "${var.s3_directory_base}/node_manager.zip"
+  filename  = "./files/node_manager_${var.marklogic_version}-SNAPSHOT.zip"
 
   handler = "nodemanager.handler"
   role    = "${aws_iam_role.node_manager_exec_role.0.arn}"
