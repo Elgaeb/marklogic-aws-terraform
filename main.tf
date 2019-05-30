@@ -35,6 +35,8 @@ module "vpc" {
 module "bastion" {
   source = "./modules/ec2-instance"
 
+  enable = "${var.bastion_enable}"
+
   aws_region = "${var.aws_region}"
 
   vpc_security_group_ids = [ "${aws_security_group.bastion_security_group.id}" ]
@@ -53,6 +55,8 @@ module "bastion" {
 
 module "ingestion" {
   source = "./modules/ec2-instance"
+
+  enable = "${var.ingestion_enable}"
 
   aws_region = "${var.aws_region}"
 

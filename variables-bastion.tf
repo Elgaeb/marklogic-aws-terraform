@@ -38,3 +38,9 @@ variable "bastion_root_block_device_size" {
 variable "bastion_root_block_device_type" {
   default = "gp2"
 }
+
+variable "bastion_enable" {
+  description = "Whether or not to create this instance"
+  default = true
+}
+

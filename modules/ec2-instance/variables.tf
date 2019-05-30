@@ -3,6 +3,11 @@ variable "aws_region" {
   default     = "us-east-1"
 }
 
+variable "enable" {
+  description = "Whether or not to create this instance"
+  default = true
+}
+
 variable "vpc_security_group_ids" {
   type = "list"
 }

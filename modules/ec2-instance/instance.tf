@@ -1,4 +1,10 @@
+locals {
+  enable_count = "${var.enable ? 1 : 0}"
+}
+
 resource "aws_instance" "ec2_instance" {
+  count = "${local.enable_count}"
+
   ami = "${lookup(var.amis, "${var.aws_region}.${var.instance_os}")}"
   instance_type = "${var.instance_type}"
   key_name = "${var.key_name}"
@@ -20,9 +26,9 @@ resource "aws_instance" "ec2_instance" {
 }
 
 resource "aws_ebs_volume" "ebs_volume" {
-  count = "${length(var.ebs_volume_size)}"
+  count = "${local.enable_count * length(var.ebs_volume_size)}"
 
-  availability_zone = "${aws_instance.ec2_instance.availability_zone}"
+  availability_zone = "${aws_instance.ec2_instance.0.availability_zone}"
   size              = "${element(var.ebs_volume_size, count.index)}"
   type              = "${var.ebs_volume_type}"
 
@@ -30,9 +36,9 @@ resource "aws_ebs_volume" "ebs_volume" {
 }
 
 resource "aws_volume_attachment" "volume_attachment" {
-  count = "${length(var.ebs_volume_size)}"
+  count = "${local.enable_count * length(var.ebs_volume_size)}"
 
   device_name = "${element(var.ebs_device_names, count.index)}"
-  instance_id = "${aws_instance.ec2_instance.id}"
+  instance_id = "${aws_instance.ec2_instance.0.id}"
   volume_id   = "${element(aws_ebs_volume.ebs_volume.*.id, count.index)}"
 }

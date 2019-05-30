@@ -4,6 +4,7 @@ key_name           = ""
 bastion_key_name   = ""
 ingestion_key_name = ""
 
+# These values should be unique across the VPC
 cluster_name   = "trade-analytics"
 cluster_id     = "vpgdgi7xCFJ4uKxB"
 
@@ -34,6 +35,7 @@ enable_grove = false
 enable_marklogic = true
 enable_ops_director = false
 
+bastion_enable = false
 bastion_instance_type = "t3.nano"
 bastion_tenancy = "default"
 bastion_remote_access_cidr_blocks = [
@@ -43,6 +45,7 @@ bastion_egress_cidr_blocks = [
   "0.0.0.0/0",
 ]
 
+ingestion_enable = true
 ingestion_instance_type = "c4.4xlarge"
 ingestion_tenancy = "default"
 ingestion_root_block_device_size = 8

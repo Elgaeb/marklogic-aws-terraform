@@ -36,3 +36,9 @@ variable "ingestion_root_block_device_size" {
 variable "ingestion_root_block_device_type" {
   default = "gp2"
 }
+
+variable "ingestion_enable" {
+  description = "Whether or not to create this instance"
+  default = true
+}
+
