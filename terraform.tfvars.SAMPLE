@@ -1,13 +1,14 @@
 access_key         = ""
 secret_key         = ""
+key_name           = ""
+bastion_key_name   = ""
+ingestion_key_name = ""
 
-key_name           = "ssh_key_name"
-
-cluster_name   = "cbp-marklogic"
-cluster_id     = "C344EEE9-421D-4F4C-88FA-7C78B8407EF6"
+cluster_name   = "trade-analytics"
+cluster_id     = "hwdEkbKPx3e5ys04"
 
 aws_region      = "us-east-1"
-azs             = ["us-east-1a","us-east-1b","us-east-1c",]
+azs             = ["us-east-1a", "us-east-1b", "us-east-1c", ]
 number_of_zones = 3
 nodes_per_zone  = 3
 
@@ -15,16 +16,29 @@ marklogic_version = "9.0-9.1"
 licensee     = "none"
 licensee_key = "none"
 
-instance_type      = "r5.4xlarge"
-volume_size        = 500
+instance_type      = "r4.8xlarge"
+volume_size        = 7000
 
 expose_administration_console = false
+enable_data_explorer = false
+enable_data_hub = true
+enable_grove = false
+enable_marklogic = true
+enable_ops_director = false
 
-bastion_instance_type = "t3.small"
-bastion_key_name   = "ssh_key_name"
+bastion_instance_type = "t3.nano"
+bastion_tenancy = "default"
+bastion_remote_access_cidr_blocks = [
+  "0.0.0.0/0",
+]
+bastion_egress_cidr_blocks = [
+  "0.0.0.0/0",
+]
 
-ingestion_instance_type = "c5.4xlarge"
-ingestion_key_name = "ssh_key_name"
-ingestion_volume_size = 500
+ingestion_instance_type = "c4.4xlarge"
+ingestion_tenancy = "default"
+ingestion_root_block_device_size = 8
+ingestion_root_block_device_type = "gp2"
+ingestion_volume_size = [ 15000, 15000 ]
 ingestion_volume_type = "gp2"
 ingestion_ebs_encrypted = false

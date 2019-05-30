@@ -1,7 +1,3 @@
-locals {
-  ebs_volume_count = "${var.ebs_volume_size > 0 ? 1 : 0}"
-}
-
 resource "aws_instance" "ec2_instance" {
   ami = "${lookup(var.amis, "${var.aws_region}.${var.instance_os}")}"
   instance_type = "${var.instance_type}"
@@ -24,16 +20,17 @@ resource "aws_instance" "ec2_instance" {
 }
 
 resource "aws_ebs_volume" "ebs_volume" {
-  count = "${local.ebs_volume_count}"
+  count = "${length(var.ebs_volume_size)}"
 
   availability_zone = "${aws_instance.ec2_instance.availability_zone}"
-  size              = "${var.ebs_volume_size}"
+  size              = "${element(var.ebs_volume_size, count.index)}"
+  type              = "${var.ebs_volume_type}"
 
   encrypted         = "${var.ebs_encrypted}"
 }
 
 resource "aws_volume_attachment" "volume_attachment" {
-  count = "${local.ebs_volume_count}"
+  count = "${length(var.ebs_volume_size)}"
 
   device_name = "${element(var.ebs_device_names, count.index)}"
   instance_id = "${aws_instance.ec2_instance.id}"

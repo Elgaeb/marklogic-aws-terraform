@@ -5,8 +5,7 @@
 resource "aws_security_group" "elb_security_group" {
   name        = "${var.cluster_name}-elb_security_group"
   description = "Enable SSH access and HTTP access on the inbound port"
-  vpc_id      = "${module.vpc.vpc_id}"
-//  vpc_id      = "${var.vpc_id}"
+  vpc_id      = "${var.vpc_id}"
 
   tags = {
     Name = "ELB Security Group"
@@ -114,8 +113,7 @@ resource "aws_elb" "elastic_load_balancer" {
     "${aws_security_group.elb_security_group.id}",
   ]
 
-//  subnets = "${var.public_subnet_ids}"
-  subnets = "${module.vpc.public_subnet_ids}"
+  subnets = "${var.public_subnet_ids}"
 
   idle_timeout = 300
 
@@ -333,7 +331,3 @@ resource "aws_app_cookie_stickiness_policy" "elb_csp_8013" {
 // </editor-fold>
 
 // </editor-fold>
-
-output "url" {
-  value = "http://${aws_elb.elastic_load_balancer.dns_name}:8001"
-}

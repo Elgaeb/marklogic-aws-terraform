@@ -5,20 +5,12 @@ locals {
 resource "aws_network_interface" "managed_eni" {
   count = "${var.number_of_zones * var.nodes_per_zone}"
 
-  subnet_id = "${element(module.vpc.private_subnet_ids, count.index % var.number_of_zones)}"
+  subnet_id = "${element(var.private_subnet_ids, count.index % var.number_of_zones)}"
   security_groups = [ "${aws_security_group.instance_security_group.id}" ]
 
   tags = {
     "cluster-eni-id" = "${local.eni_tag_prefix}${count.index}"
   }
-}
-
-output "managed_eni_private_ips" {
-  value = "${aws_network_interface.managed_eni.*.private_ip}"
-}
-
-output "managed_eni_private_dns" {
-  value = "${aws_network_interface.managed_eni.*.private_dns_name}"
 }
 
 data "aws_iam_policy_document" "node_manager_exec_assume_role_policy" {
@@ -109,7 +101,7 @@ resource "aws_lambda_function" "node_manager_function" {
 
 //  s3_bucket = "${var.lambda_package_bucket_base}${var.aws_region}"
 //  s3_key    = "${var.s3_directory_base}/node_manager.zip"
-  filename  = "./files/node_manager_${var.marklogic_version}-SNAPSHOT.zip"
+  filename  = "./modules/marklogic/files/node_manager_${var.marklogic_version}.zip"
 
   handler = "nodemanager.handler"
   role    = "${aws_iam_role.node_manager_exec_role.0.arn}"
@@ -138,12 +130,4 @@ resource "aws_lambda_permission" "node_manager_invoke_permission" {
   function_name = "${aws_lambda_function.node_manager_function.0.function_name}"
   principal     = "sns.amazonaws.com"
   source_arn    = "${aws_sns_topic.node_manager_sns_topic.0.arn}"
-}
-
-output "node_manager_iam_arn" {
-  value = "${aws_iam_role.node_manager_exec_role.*.arn}"
-}
-
-output "node_manager_sns_arn" {
-  value = "${aws_sns_topic.node_manager_sns_topic.*.arn}"
 }

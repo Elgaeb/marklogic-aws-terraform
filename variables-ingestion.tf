@@ -10,8 +10,8 @@ variable "ingestion_key_name" {
 }
 
 variable "ingestion_volume_size" {
-  type = "string"
-  default = 0
+  type = "list"
+  default = []
 }
 
 variable "ingestion_volume_type" {
@@ -27,4 +27,12 @@ variable "ingestion_tenancy" {
 
 variable "ingestion_ebs_encrypted" {
   default = true
+}
+
+variable "ingestion_root_block_device_size" {
+  default = 8
+}
+
+variable "ingestion_root_block_device_type" {
+  default = "gp2"
 }

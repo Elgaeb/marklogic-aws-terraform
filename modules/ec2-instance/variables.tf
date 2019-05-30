@@ -43,7 +43,8 @@ variable "root_block_device_size" {
 }
 
 variable "ebs_volume_size" {
-  default = 0
+  type = "list"
+  default = [ ]
 }
 
 variable "ebs_volume_type" {

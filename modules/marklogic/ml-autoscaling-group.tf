@@ -34,7 +34,7 @@ resource "aws_ebs_volume" "marklogic_volume" {
 
 data "template_file" "user_data" {
   count    = "${(var.enable_marklogic ? 1 : 0) * var.number_of_zones}"
-  template = "${file("marklogic_userdata.sh")}"
+  template = "${file("modules/marklogic/files/marklogic_userdata.sh")}"
 
   vars = {
     node                   = "Node${count.index + 1}_#"
@@ -79,7 +79,6 @@ resource "aws_autoscaling_group" "marklogic_server_group" {
 
   depends_on = [
     "aws_dynamodb_table.marklogic_ddb_table",
-//    "aws_cloudformation_stack.managed_eni_stack",
     "aws_lambda_function.node_manager_function",
     "aws_lambda_permission.node_manager_invoke_permission",
   ]
@@ -87,7 +86,7 @@ resource "aws_autoscaling_group" "marklogic_server_group" {
   name = "${var.cluster_name}-marklogic_server_group_${count.index}"
 
   vpc_zone_identifier = [
-    "${element(module.vpc.private_subnet_ids, count.index)}",
+    "${element(var.private_subnet_ids, count.index)}",
   ]
 
   min_size                  = 0
