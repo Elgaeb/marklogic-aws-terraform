@@ -35,6 +35,12 @@ variable "volume_size" {
   default = 10
 }
 
+variable "volume_count" {
+  description = "The number of volumes per node to use for MarkLogic data"
+  type = "string"
+  default = 1
+}
+
 variable "volume_type" {
   description = "The EBS volume type: standard, gp2, or io1"
   type    = "string"
@@ -131,7 +137,6 @@ variable "enable_marklogic" {
 
 variable "vpc_cidr" {
   type    = "string"
-  default = "10.0.0.0/16"
 }
 
 variable "vpc_id" {

@@ -47,6 +47,12 @@ variable "volume_iops" {
   default = ""
 }
 
+variable "volume_count" {
+  description = "The number of volumes per node to use for MarkLogic data"
+  type = "string"
+  default = 1
+}
+
 variable "cluster_name" {
   type    = "string"
 }

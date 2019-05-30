@@ -15,22 +15,22 @@ resource "aws_dynamodb_table" "marklogic_ddb_table" {
 
 // <editor-fold desc="Instance Autoscaling Groups">
 
-resource "aws_ebs_volume" "marklogic_volume" {
-  count             = "${(var.enable_marklogic ? 1 : 0) * var.number_of_zones}"
-  availability_zone = "${element(var.azs, count.index)}"
-  size              = "${var.volume_size}"
-  type              = "${var.volume_type}"
-
-  lifecycle {
-    ignore_changes = [
-      "tags",
-    ]
-  }
-
-  tags = {
-    Name = "${var.cluster_name}-MarkLogicData-${count.index + 1}"
-  }
-}
+//resource "aws_ebs_volume" "marklogic_volume" {
+//  count             = "${(var.enable_marklogic ? 1 : 0) * var.number_of_zones}"
+//  availability_zone = "${element(var.azs, count.index)}"
+//  size              = "${var.volume_size}"
+//  type              = "${var.volume_type}"
+//
+//  lifecycle {
+//    ignore_changes = [
+//      "tags",
+//    ]
+//  }
+//
+//  tags = {
+//    Name = "${var.cluster_name}-MarkLogicData-${count.index + 1}"
+//  }
+//}
 
 data "template_file" "user_data" {
   count    = "${(var.enable_marklogic ? 1 : 0) * var.number_of_zones}"
@@ -42,7 +42,8 @@ data "template_file" "user_data" {
     licensee               = "${var.licensee}"
     licensee_key           = "${var.licensee_key}"
     cluster_name           = "${var.cluster_name}"
-    ebs_volume             = "${element(aws_ebs_volume.marklogic_volume.*.id, count.index)}"
+//    ebs_volume             = "${element(aws_ebs_volume.marklogic_volume.*.id, count.index)}"
+    volume_count           = "${var.volume_count}"
     volume_size            = "${var.volume_size}"
     volume_type            = "${var.volume_type}"
     marklogic_version      = "${var.marklogic_version}"

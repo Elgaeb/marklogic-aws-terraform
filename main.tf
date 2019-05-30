@@ -14,27 +14,23 @@ provider "template" {
   version = "~> 2.1"
 }
 
-module "vpc" {
-  source = "./modules/vpc"
-
-  vpc_name              = "${var.cluster_name}-vpc"
-  aws_region            = "${var.aws_region}"
-  azs                   = "${var.azs}"
-  number_of_zones       = "${var.number_of_zones}"
-}
-
-//module "bastion" {
-//  source = "./modules/bastion"
+//module "vpc" {
+//  source = "./modules/vpc"
 //
-//  aws_region = "${var.aws_region}"
-//
-//  bastion_instance_type = "${var.bastion_instance_type}"
-//  bastion_key_name      = "${var.bastion_key_name}"
-//
-//  subnet_ids            = "${module.vpc.public_subnet_ids}"
 //  vpc_name              = "${var.cluster_name}-vpc"
-//  vpc_id                = "${module.vpc.vpc_id}"
+//  aws_region            = "${var.aws_region}"
+//  azs                   = "${var.azs}"
+//  number_of_zones       = "${var.number_of_zones}"
 //}
+
+module "vpc" {
+  source = "./modules/existing-vpc"
+
+  vpc_cidr           = "${var.vpc_cidr}"
+  vpc_id             = "${var.vpc_id}"
+  public_subnet_ids  = "${var.public_subnet_ids}"
+  private_subnet_ids = "${var.private_subnet_ids}"
+}
 
 module "bastion" {
   source = "./modules/ec2-instance"
@@ -93,6 +89,7 @@ module "marklogic" {
   instance_type = "${var.instance_type}"
   volume_size = "${var.volume_size}"
   volume_type = "${var.volume_type}"
+  volume_count = "${var.volume_count}"
 
   expose_administration_console = "${var.expose_administration_console}"
 
