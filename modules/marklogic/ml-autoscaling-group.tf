@@ -15,23 +15,6 @@ resource "aws_dynamodb_table" "marklogic_ddb_table" {
 
 // <editor-fold desc="Instance Autoscaling Groups">
 
-//resource "aws_ebs_volume" "marklogic_volume" {
-//  count             = "${(var.enable_marklogic ? 1 : 0) * var.number_of_zones}"
-//  availability_zone = "${element(var.azs, count.index)}"
-//  size              = "${var.volume_size}"
-//  type              = "${var.volume_type}"
-//
-//  lifecycle {
-//    ignore_changes = [
-//      "tags",
-//    ]
-//  }
-//
-//  tags = {
-//    Name = "${var.cluster_name}-MarkLogicData-${count.index + 1}"
-//  }
-//}
-
 data "template_file" "user_data" {
   count    = "${(var.enable_marklogic ? 1 : 0) * var.number_of_zones}"
   template = "${file("modules/marklogic/files/marklogic_userdata.sh")}"
@@ -42,10 +25,11 @@ data "template_file" "user_data" {
     licensee               = "${var.licensee}"
     licensee_key           = "${var.licensee_key}"
     cluster_name           = "${var.cluster_name}"
-//    ebs_volume             = "${element(aws_ebs_volume.marklogic_volume.*.id, count.index)}"
     volume_count           = "${var.volume_count}"
     volume_size            = "${var.volume_size}"
     volume_type            = "${var.volume_type}"
+    volume_iops            = "${var.volume_iops}"
+    volume_encrypted       = "${var.volume_encrypted}"
     marklogic_version      = "${var.marklogic_version}"
   }
 }
@@ -87,12 +71,12 @@ resource "aws_autoscaling_group" "marklogic_server_group" {
   name = "${var.cluster_name}-marklogic_server_group_${count.index}"
 
   vpc_zone_identifier = [
-    "${element(var.private_subnet_ids, count.index)}",
+    "${element(var.private_subnet_ids, count.index % length(var.private_subnet_ids))}",
   ]
 
   min_size                  = 0
-  max_size                  = "${var.nodes_per_zone}"
-  desired_capacity          = "${var.nodes_per_zone}"
+  max_size                  = "${element(local.node_counts, count.index % length(local.node_counts))}"
+  desired_capacity          = "${element(local.node_counts, count.index % length(local.node_counts))}"
   default_cooldown          = 300
   health_check_type         = "EC2"
   health_check_grace_period = 300
@@ -114,7 +98,7 @@ resource "aws_autoscaling_group" "marklogic_server_group" {
 
   tag {
     key                 = "marklogic:stack:name"
-    value               = "${var.cluster_name}"
+    value               = "${var.cluster_name}-${count.index}"
     propagate_at_launch = true
   }
 
@@ -126,7 +110,7 @@ resource "aws_autoscaling_group" "marklogic_server_group" {
 
   tag {
     key                 = "Name"
-    value               = "${var.cluster_name}_Node${count.index + 1}"
+    value               = "${var.cluster_name}-${count.index}_Node${count.index + 1}"
     propagate_at_launch = true
   }
 }

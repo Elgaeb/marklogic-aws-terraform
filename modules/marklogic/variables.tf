@@ -50,7 +50,12 @@ variable "volume_type" {
 variable "volume_iops" {
   description = "For io1 volumes only, the provisioned IOP (PIOP)"
   type = "string"
-  default = ""
+  default = "100"
+}
+
+variable "volume_encrypted" {
+  type = "string"
+  default = "false"
 }
 
 variable "cluster_name" {

@@ -94,6 +94,8 @@ module "marklogic" {
   volume_size = "${var.volume_size}"
   volume_type = "${var.volume_type}"
   volume_count = "${var.volume_count}"
+  volume_iops = "${var.volume_iops}"
+  volume_encrypted = "${var.volume_encrypted}"
 
   expose_administration_console = "${var.expose_administration_console}"
 

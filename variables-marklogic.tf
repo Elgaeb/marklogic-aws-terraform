@@ -53,6 +53,11 @@ variable "volume_count" {
   default = 1
 }
 
+variable "volume_encrypted" {
+  type = "string"
+  default = "false"
+}
+
 variable "cluster_name" {
   type    = "string"
 }

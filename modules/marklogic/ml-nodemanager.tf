@@ -1,17 +1,13 @@
-locals {
-  eni_tag_prefix = "${var.cluster_name}-${md5(var.cluster_id)}_"
-}
-
-resource "aws_network_interface" "managed_eni" {
-  count = "${var.number_of_zones * var.nodes_per_zone}"
-
-  subnet_id = "${element(var.private_subnet_ids, count.index % var.number_of_zones)}"
-  security_groups = [ "${aws_security_group.instance_security_group.id}" ]
-
-  tags = {
-    "cluster-eni-id" = "${local.eni_tag_prefix}${count.index}"
-  }
-}
+//resource "aws_network_interface" "managed_eni" {
+//  count = "${var.number_of_zones * var.nodes_per_zone}"
+//
+//  subnet_id = "${element(var.private_subnet_ids, count.index % var.number_of_zones)}"
+//  security_groups = [ "${aws_security_group.instance_security_group.id}" ]
+//
+//  tags = {
+//    "cluster-eni-id" = "${local.eni_tag_prefix}${count.index}"
+//  }
+//}
 
 data "aws_iam_policy_document" "node_manager_exec_assume_role_policy" {
   statement {
@@ -94,7 +90,12 @@ resource "aws_lambda_function" "node_manager_function" {
   count = "${var.enable_marklogic ? 1 : 0}"
 
   depends_on = [
-    "aws_network_interface.managed_eni"
+    "aws_network_interface.managed_eni_group_1",
+    "aws_network_interface.managed_eni_group_2",
+    "aws_network_interface.managed_eni_group_3",
+    "aws_network_interface.managed_eni_group_4",
+    "aws_network_interface.managed_eni_group_5",
+    "aws_network_interface.managed_eni_group_6",
   ]
 
   function_name = "${var.cluster_name}-node_manager_function"
