@@ -86,7 +86,6 @@ module "marklogic" {
   cluster_name = "${var.cluster_name}"
   cluster_id = "${var.cluster_id}"
   aws_region = "${var.aws_region}"
-  azs = "${var.azs}"
   number_of_zones = "${var.number_of_zones}"
   nodes_per_zone = "${var.nodes_per_zone}"
 
@@ -100,8 +99,10 @@ module "marklogic" {
   expose_administration_console = "${var.expose_administration_console}"
 
   enable_data_explorer = "${var.enable_data_explorer}"
+  data_explorer_port = "${var.data_explorer_port}"
   enable_data_hub = "${var.enable_data_hub}"
   enable_grove = "${var.enable_grove}"
+  grove_port = "${var.grove_port}"
   enable_marklogic = "${var.enable_marklogic}"
   enable_ops_director = "${var.enable_ops_director}"
 
@@ -109,5 +110,6 @@ module "marklogic" {
   vpc_id             = "${module.vpc.vpc_id}"
   public_subnet_ids  = "${module.vpc.public_subnet_ids}"
   private_subnet_ids = "${module.vpc.private_subnet_ids}"
+
 }
 

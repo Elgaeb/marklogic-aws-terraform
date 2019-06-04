@@ -139,3 +139,21 @@ variable "enable_marklogic" {
   description = "Whether to create the MarkLogic components. Setting this to false will destroy all of the MarkLogic security groups, instances, and volumes. It will not destroy the ELB. Default true."
   default = true
 }
+
+variable "data_explorer_port" {
+  type = "string"
+  default = "7777"
+}
+
+variable "grove_port" {
+  type = "string"
+  default = "8063"
+}
+
+variable "enable_odbc" {
+  default = false
+}
+
+variable "odbc_port" {
+  default = 5432
+}

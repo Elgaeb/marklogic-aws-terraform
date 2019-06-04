@@ -80,16 +80,6 @@ variable "log_sns_arn" {
   default = ""
 }
 
-variable "azs" {
-  type = "list"
-
-  default = [
-    "us-east-1a",
-    "us-east-1b",
-    "us-east-1c"
-  ]
-}
-
 variable "lambda_package_bucket_base" {
   type    = "string"
   default = "marklogic-lambda-"
@@ -154,4 +144,22 @@ variable "public_subnet_ids" {
 
 variable "private_subnet_ids" {
   type = "list"
+}
+
+variable "data_explorer_port" {
+  type = "string"
+  default = "7777"
+}
+
+variable "grove_port" {
+  type = "string"
+  default = "8063"
+}
+
+variable "enable_odbc" {
+  default = false
+}
+
+variable "odbc_port" {
+  default = 5432
 }

@@ -10,7 +10,6 @@ variable "ingestion_key_name" {
 }
 
 variable "ingestion_volume_size" {
-  type = "list"
   default = []
 }
 

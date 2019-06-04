@@ -1,14 +1,3 @@
-//resource "aws_network_interface" "managed_eni" {
-//  count = "${var.number_of_zones * var.nodes_per_zone}"
-//
-//  subnet_id = "${element(var.private_subnet_ids, count.index % var.number_of_zones)}"
-//  security_groups = [ "${aws_security_group.instance_security_group.id}" ]
-//
-//  tags = {
-//    "cluster-eni-id" = "${local.eni_tag_prefix}${count.index}"
-//  }
-//}
-
 data "aws_iam_policy_document" "node_manager_exec_assume_role_policy" {
   statement {
     actions = ["sts:AssumeRole"]
@@ -27,10 +16,10 @@ data "aws_iam_policy_document" "node_manager_exec_assume_role_policy" {
 }
 
 resource "aws_iam_role" "node_manager_exec_role" {
-  count = "${var.enable_marklogic ? 1 : 0}"
+  count = var.enable_marklogic ? 1 : 0
 
   name               = "${var.cluster_name}-node_manager_exec_role"
-  assume_role_policy = "${data.aws_iam_policy_document.node_manager_exec_assume_role_policy.json}"
+  assume_role_policy = data.aws_iam_policy_document.node_manager_exec_assume_role_policy.json
 }
 
 data "aws_iam_policy_document" "node_manager_role_policy" {
@@ -73,29 +62,29 @@ data "aws_iam_policy_document" "node_manager_role_policy" {
 }
 
 resource "aws_iam_policy" "node_manager_policy" {
-  count = "${var.enable_marklogic ? 1 : 0}"
+  count = var.enable_marklogic ? 1 : 0
 
   name   = "${var.cluster_name}-node_manager_policy"
-  policy = "${data.aws_iam_policy_document.node_manager_role_policy.json}"
+  policy = data.aws_iam_policy_document.node_manager_role_policy.json
 }
 
 resource "aws_iam_role_policy_attachment" "node_manager_policy_attachment" {
-  count = "${var.enable_marklogic ? 1 : 0}"
+  count = var.enable_marklogic ? 1 : 0
 
-  role       = "${aws_iam_role.node_manager_exec_role.0.name}"
-  policy_arn = "${aws_iam_policy.node_manager_policy.0.arn}"
+  role       = aws_iam_role.node_manager_exec_role[0].name
+  policy_arn = aws_iam_policy.node_manager_policy[0].arn
 }
 
 resource "aws_lambda_function" "node_manager_function" {
   count = "${var.enable_marklogic ? 1 : 0}"
 
   depends_on = [
-    "aws_network_interface.managed_eni_group_1",
-    "aws_network_interface.managed_eni_group_2",
-    "aws_network_interface.managed_eni_group_3",
-    "aws_network_interface.managed_eni_group_4",
-    "aws_network_interface.managed_eni_group_5",
-    "aws_network_interface.managed_eni_group_6",
+    aws_network_interface.managed_eni_group_1,
+    aws_network_interface.managed_eni_group_2,
+    aws_network_interface.managed_eni_group_3,
+    aws_network_interface.managed_eni_group_4,
+    aws_network_interface.managed_eni_group_5,
+    aws_network_interface.managed_eni_group_6,
   ]
 
   function_name = "${var.cluster_name}-node_manager_function"
@@ -105,30 +94,30 @@ resource "aws_lambda_function" "node_manager_function" {
   filename  = "./modules/marklogic/files/node_manager_${var.marklogic_version}.zip"
 
   handler = "nodemanager.handler"
-  role    = "${aws_iam_role.node_manager_exec_role.0.arn}"
+  role    = aws_iam_role.node_manager_exec_role[0].arn
   runtime = "python3.6"
   timeout = 180
 }
 
 resource "aws_sns_topic" "node_manager_sns_topic" {
-  count = "${var.enable_marklogic ? 1 : 0}"
+  count = var.enable_marklogic ? 1 : 0
 
   name = "${var.cluster_name}-node_manager_sns_topic"
 }
 
 resource "aws_sns_topic_subscription" "node_manager_sns_topic_subscription" {
-  count = "${var.enable_marklogic ? 1 : 0}"
+  count = var.enable_marklogic ? 1 : 0
 
-  endpoint  = "${aws_lambda_function.node_manager_function.0.arn}"
+  endpoint  = aws_lambda_function.node_manager_function[0].arn
   protocol  = "lambda"
-  topic_arn = "${aws_sns_topic.node_manager_sns_topic.0.arn}"
+  topic_arn = aws_sns_topic.node_manager_sns_topic[0].arn
 }
 
 resource "aws_lambda_permission" "node_manager_invoke_permission" {
-  count = "${var.enable_marklogic ? 1 : 0}"
+  count = var.enable_marklogic ? 1 : 0
 
   action        = "lambda:InvokeFunction"
-  function_name = "${aws_lambda_function.node_manager_function.0.function_name}"
+  function_name = aws_lambda_function.node_manager_function[0].function_name
   principal     = "sns.amazonaws.com"
-  source_arn    = "${aws_sns_topic.node_manager_sns_topic.0.arn}"
+  source_arn    = aws_sns_topic.node_manager_sns_topic[0].arn
 }

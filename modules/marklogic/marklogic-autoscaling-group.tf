@@ -71,7 +71,7 @@ resource "aws_autoscaling_group" "marklogic_server_group" {
   name = "${var.cluster_name}-marklogic_server_group_${count.index}"
 
   vpc_zone_identifier = [
-    "${element(var.private_subnet_ids, count.index % length(var.private_subnet_ids))}",
+    element(var.private_subnet_ids, count.index % length(var.private_subnet_ids))
   ]
 
   min_size                  = 0
@@ -82,8 +82,8 @@ resource "aws_autoscaling_group" "marklogic_server_group" {
   health_check_grace_period = 300
 
   load_balancers = [
-    "${aws_elb.elastic_load_balancer.name}",
-    "${aws_elb.internal_elastic_load_balancer.name}",
+    aws_elb.external_elb.name,
+    aws_elb.internal_elb.name,
   ]
 
   launch_configuration = "${element(aws_launch_configuration.launch_configuration.*.name, count.index)}"

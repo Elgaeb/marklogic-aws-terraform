@@ -47,14 +47,23 @@ variable "root_block_device_size" {
   default = 8
 }
 
+variable "root_block_device_iops" {
+  type = "string"
+  default = null
+}
+
 variable "ebs_volume_size" {
-  type = "list"
   default = [ ]
 }
 
 variable "ebs_volume_type" {
   type = "string"
   default = "gp2"
+}
+
+variable "ebs_volume_iops" {
+  type = "string"
+  default = null
 }
 
 variable "ebs_encrypted" {
