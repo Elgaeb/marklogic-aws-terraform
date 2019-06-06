@@ -1,29 +1,23 @@
 output "nat_ip" {
-  value = aws_eip.nat_eip.public_ip
+  value = aws_eip.nat_eip[0].public_ip
 }
 
 output "vpc_id" {
-  value = aws_vpc.marklogic_vpc.id
+  value = var.enable ? aws_vpc.marklogic_vpc[0].id : ""
 }
 
 output "vpc_cidr_block" {
-  value = aws_vpc.marklogic_vpc.cidr_block
+  value = var.enable ? aws_vpc.marklogic_vpc[0].cidr_block : ""
 }
 
-output "public_subnets" {
-  value = {
-    for subnet in aws_subnet.public_subnet:
-    subnet.id => [ subnet.cidr_block, subnet.availability_zone ]
-  }
+output "public_subnet_ids" {
+  value = [ for subnet in aws_subnet.public_subnet: subnet.id ]
 }
 
-output "private_subnets" {
-  value = {
-    for subnet in aws_subnet.private_subnet:
-    subnet.id => [ subnet.cidr_block, subnet.availability_zone ]
-  }
+output "private_subnet_ids" {
+  value = [ for subnet in aws_subnet.private_subnet: subnet.id ]
 }
 
 output "default_security_group_id" {
-  value = aws_vpc.marklogic_vpc.default_security_group_id
+  value = aws_vpc.marklogic_vpc[0].default_security_group_id
 }

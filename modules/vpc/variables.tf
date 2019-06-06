@@ -45,3 +45,7 @@ variable "public_subnet_cidrs" {
     "10.0.160.0/23",
   ]
 }
+
+variable "enable" {
+  default = true
+}

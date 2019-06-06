@@ -1,11 +1,11 @@
 variable "vpc_cidr" {
   type    = "string"
-  default = ""
+  default = null
 }
 
 variable "vpc_id" {
   type = "string"
-  default = ""
+  default = null
 }
 
 variable "public_subnet_ids" {
