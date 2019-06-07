@@ -1,11 +1,9 @@
+resource "aws_launch_configuration" "launch_configuration" {
+  count = var.enable ? 1 : 0
 
-// <editor-fold desc="Instance Autoscaling Groups">
-
-data "template_file" "user_data" {
-  count    = var.enable ? 1 : 0
-  template = file("modules/marklogic/modules/server-resources/files/marklogic_userdata.sh")
-
-  vars = {
+  key_name  = var.key_name
+  image_id  = lookup(var.amis, "v${var.marklogic_version}.${var.aws_region}.${var.licensee_key == "" && var.licensee == "" ? "enterprise" : "byol"}")
+  user_data = templatefile("modules/marklogic/modules/server-resources/files/marklogic_userdata.tmpl", {
     node                     = format("Node%d_#", var.group_number + 1)
     master                   = tonumber(var.group_number) == 0 ? 1 : 0
     licensee                 = var.licensee
@@ -25,15 +23,8 @@ data "template_file" "user_data" {
     marklogic_ebs_volume_7   = module.volume_7.marklogic_ebs_volume
     marklogic_ebs_volume_8   = module.volume_8.marklogic_ebs_volume
     marklogic_ebs_volume_9   = module.volume_9.marklogic_ebs_volume
-  }
-}
-
-resource "aws_launch_configuration" "launch_configuration" {
-  count = var.enable ? 1 : 0
-
-  key_name  = var.key_name
-  image_id  = lookup(var.amis, "v${var.marklogic_version}.${var.aws_region}.${var.licensee_key == "" && var.licensee == "" ? "enterprise" : "byol"}")
-  user_data = data.template_file.user_data[0].rendered
+  })
+  //data.template_file.user_data[0].rendered
 
   security_groups = [
     var.instance_security_group_id
@@ -109,5 +100,3 @@ resource "aws_autoscaling_notification" "marklogic_server_group_notification" {
 
   topic_arn = var.node_manager_sns_topic_arn
 }
-
-// </editor-fold>

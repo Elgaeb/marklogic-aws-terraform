@@ -1,0 +1,27 @@
+#!/bin/bash
+
+rpm -i /home/ec2-user/MarkLogicConverters-${marklogic_version}.x86_64.rpm
+
+MARKLOGIC_ADMIN_USERNAME=admin
+MARKLOGIC_ADMIN_PASSWORD=${marklogic_admin_password}
+MARKLOGIC_CLUSTER_NAME=${cluster_name}
+
+MARKLOGIC_EBS_VOLUME=${marklogic_ebs_volume}
+%{ if volume_count > 1 }MARKLOGIC_EBS_VOLUME1=${marklogic_ebs_volume_1}%{ endif }
+%{ if volume_count > 2 }MARKLOGIC_EBS_VOLUME2=${marklogic_ebs_volume_2}%{ endif }
+%{ if volume_count > 3 }MARKLOGIC_EBS_VOLUME3=${marklogic_ebs_volume_3}%{ endif }
+%{ if volume_count > 4 }MARKLOGIC_EBS_VOLUME4=${marklogic_ebs_volume_4}%{ endif }
+%{ if volume_count > 5 }MARKLOGIC_EBS_VOLUME5=${marklogic_ebs_volume_5}%{ endif }
+%{ if volume_count > 6 }MARKLOGIC_EBS_VOLUME6=${marklogic_ebs_volume_6}%{ endif }
+%{ if volume_count > 7 }MARKLOGIC_EBS_VOLUME7=${marklogic_ebs_volume_7}%{ endif }
+%{ if volume_count > 8 }MARKLOGIC_EBS_VOLUME8=${marklogic_ebs_volume_8}%{ endif }
+%{ if volume_count > 9 }MARKLOGIC_EBS_VOLUME9=${marklogic_ebs_volume_9}%{ endif }
+
+MARKLOGIC_NODE_NAME=${node}
+MARKLOGIC_CLUSTER_MASTER=${master}
+MARKLOGIC_LICENSEE=${licensee}
+MARKLOGIC_LICENSE_KEY=${licensee_key}
+MARKLOGIC_LOG_SNS=
+MARKLOGIC_MDB_TYPE=ddb
+MDB_NODE_NAME=${node}
+MDB_NAME=${cluster_name}
