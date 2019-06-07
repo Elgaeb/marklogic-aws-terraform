@@ -8,6 +8,10 @@ variable "licensee_key" {
   default = "none"
 }
 
+variable "marklogic_admin_password" {
+  type = "string"
+}
+
 variable "marklogic_version" {
   type    = "string"
   default = "9.0-9.1"

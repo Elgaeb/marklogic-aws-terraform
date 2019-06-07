@@ -1,3 +1,7 @@
+variable "marklogic_admin_password" {
+  type = "string"
+}
+
 variable "enable" {
   type    = "string"
   default = true

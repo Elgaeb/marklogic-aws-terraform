@@ -3,7 +3,7 @@
 rpm -i /home/ec2-user/MarkLogicConverters-${marklogic_version}.x86_64.rpm
 
 MARKLOGIC_ADMIN_USERNAME=admin
-MARKLOGIC_ADMIN_PASSWORD=m@rk^.^logic
+MARKLOGIC_ADMIN_PASSWORD=${marklogic_admin_password}
 MARKLOGIC_CLUSTER_NAME=${cluster_name}
 
 MARKLOGIC_EBS_VOLUME=${marklogic_ebs_volume}
