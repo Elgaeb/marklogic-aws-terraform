@@ -14,7 +14,7 @@ resource "aws_ebs_volume" "marklogic_volume" {
   availability_zone = var.availability_zone
   size              = local.volume_size[var.volume_number % length(local.volume_size)]
   type              = local.volume_type[var.volume_number % length(local.volume_type)]
-  iops              = local.volume_iops[var.volume_number % length(local.volume_iops)]
+  iops              = local.volume_type == "io1" ? local.volume_iops[var.volume_number % length(local.volume_iops)] : null
 
   lifecycle {
     ignore_changes = [

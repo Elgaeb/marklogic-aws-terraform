@@ -1,9 +1,11 @@
-resource "aws_launch_configuration" "launch_configuration" {
-  count = var.enable ? 1 : 0
 
-  key_name  = var.key_name
-  image_id  = lookup(var.amis, "v${var.marklogic_version}.${var.aws_region}.${var.licensee_key == "" && var.licensee == "" ? "enterprise" : "byol"}")
-  user_data = templatefile("modules/marklogic/modules/server-resources/files/marklogic_userdata.tmpl", {
+// <editor-fold desc="Instance Autoscaling Groups">
+
+data "template_file" "user_data" {
+  count    = var.enable ? 1 : 0
+  template = file("modules/marklogic/modules/server-group/files/marklogic_userdata.tmpl")
+
+  vars = {
     node                     = format("Node%d_#", var.group_number + 1)
     master                   = tonumber(var.group_number) == 0 ? 1 : 0
     licensee                 = var.licensee
@@ -23,8 +25,36 @@ resource "aws_launch_configuration" "launch_configuration" {
     marklogic_ebs_volume_7   = module.volume_7.marklogic_ebs_volume
     marklogic_ebs_volume_8   = module.volume_8.marklogic_ebs_volume
     marklogic_ebs_volume_9   = module.volume_9.marklogic_ebs_volume
-  })
-  //data.template_file.user_data[0].rendered
+  }
+}
+
+resource "aws_launch_configuration" "launch_configuration" {
+  count = var.enable ? 1 : 0
+
+  key_name  = var.key_name
+  image_id  = lookup(var.amis, "v${var.marklogic_version}.${var.aws_region}.${var.licensee_key == "" && var.licensee == "" ? "enterprise" : "byol"}")
+//  user_data = templatefile("modules/marklogic/modules/server-resources/files/marklogic_userdata.tmpl", {
+//    node                     = format("Node%d_#", var.group_number + 1)
+//    master                   = tonumber(var.group_number) == 0 ? 1 : 0
+//    licensee                 = var.licensee
+//    licensee_key             = var.licensee_key
+//    cluster_name             = var.cluster_name
+//    marklogic_version        = var.marklogic_version
+//    marklogic_admin_password = var.marklogic_admin_password
+//
+//    volume_count             = var.volume_count
+//    marklogic_ebs_volume     = module.volume_0.marklogic_ebs_volume
+//    marklogic_ebs_volume_1   = module.volume_1.marklogic_ebs_volume
+//    marklogic_ebs_volume_2   = module.volume_2.marklogic_ebs_volume
+//    marklogic_ebs_volume_3   = module.volume_3.marklogic_ebs_volume
+//    marklogic_ebs_volume_4   = module.volume_4.marklogic_ebs_volume
+//    marklogic_ebs_volume_5   = module.volume_5.marklogic_ebs_volume
+//    marklogic_ebs_volume_6   = module.volume_6.marklogic_ebs_volume
+//    marklogic_ebs_volume_7   = module.volume_7.marklogic_ebs_volume
+//    marklogic_ebs_volume_8   = module.volume_8.marklogic_ebs_volume
+//    marklogic_ebs_volume_9   = module.volume_9.marklogic_ebs_volume
+//  })
+  user_data = data.template_file.user_data[0].rendered
 
   security_groups = [
     var.instance_security_group_id
@@ -100,3 +130,5 @@ resource "aws_autoscaling_notification" "marklogic_server_group_notification" {
 
   topic_arn = var.node_manager_sns_topic_arn
 }
+
+// </editor-fold>

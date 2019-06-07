@@ -106,5 +106,57 @@ module "marklogic" {
   public_subnet_ids  = local.public_subnet_ids
   private_subnet_ids = local.private_subnet_ids
 
-  server_groups = var.server_groups
+  server_group_0_subnet_index = var.server_group_0_subnet_index
+  server_group_0_node_count = var.server_group_0_node_count
+  server_group_0_instance_type = var.server_group_0_instance_type
+  server_group_0_volume_size = var.server_group_0_volume_size
+  server_group_0_volume_type = var.server_group_0_volume_type
+  server_group_0_volume_iops = var.server_group_0_volume_iops
+  server_group_0_volume_encrypted = var.server_group_0_volume_encrypted
+  server_group_0_volume_count = var.server_group_0_volume_count
+
+  server_group_1_subnet_index = var.server_group_1_subnet_index
+  server_group_1_node_count = var.server_group_1_node_count
+  server_group_1_instance_type = var.server_group_1_instance_type
+  server_group_1_volume_size = var.server_group_1_volume_size
+  server_group_1_volume_type = var.server_group_1_volume_type
+  server_group_1_volume_iops = var.server_group_1_volume_iops
+  server_group_1_volume_encrypted = var.server_group_1_volume_encrypted
+  server_group_1_volume_count = var.server_group_1_volume_count
+
+  server_group_2_subnet_index = var.server_group_2_subnet_index
+  server_group_2_node_count = var.server_group_2_node_count
+  server_group_2_instance_type = var.server_group_2_instance_type
+  server_group_2_volume_size = var.server_group_2_volume_size
+  server_group_2_volume_type = var.server_group_2_volume_type
+  server_group_2_volume_iops = var.server_group_2_volume_iops
+  server_group_2_volume_encrypted = var.server_group_2_volume_encrypted
+  server_group_2_volume_count = var.server_group_2_volume_count
+
+  server_group_3_subnet_index = var.server_group_3_subnet_index
+  server_group_3_node_count = var.server_group_3_node_count
+  server_group_3_instance_type = var.server_group_3_instance_type
+  server_group_3_volume_size = var.server_group_3_volume_size
+  server_group_3_volume_type = var.server_group_3_volume_type
+  server_group_3_volume_iops = var.server_group_3_volume_iops
+  server_group_3_volume_encrypted = var.server_group_3_volume_encrypted
+  server_group_3_volume_count = var.server_group_3_volume_count
+
+  server_group_4_subnet_index = var.server_group_4_subnet_index
+  server_group_4_node_count = var.server_group_4_node_count
+  server_group_4_instance_type = var.server_group_4_instance_type
+  server_group_4_volume_size = var.server_group_4_volume_size
+  server_group_4_volume_type = var.server_group_4_volume_type
+  server_group_4_volume_iops = var.server_group_4_volume_iops
+  server_group_4_volume_encrypted = var.server_group_4_volume_encrypted
+  server_group_4_volume_count = var.server_group_4_volume_count
+
+  server_group_5_subnet_index = var.server_group_5_subnet_index
+  server_group_5_node_count = var.server_group_5_node_count
+  server_group_5_instance_type = var.server_group_5_instance_type
+  server_group_5_volume_size = var.server_group_5_volume_size
+  server_group_5_volume_type = var.server_group_5_volume_type
+  server_group_5_volume_iops = var.server_group_5_volume_iops
+  server_group_5_volume_encrypted = var.server_group_5_volume_encrypted
+  server_group_5_volume_count = var.server_group_5_volume_count
 }

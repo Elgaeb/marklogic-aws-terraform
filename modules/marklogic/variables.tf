@@ -179,17 +179,3 @@ variable "odbc_port" {
   default = 5432
 }
 
-variable "server_groups" {
-  type = "list"
-//  default = [
-//    {
-//      subnet_index = 0
-//      node_count = 1
-//      instance_type = "t3.small"
-//      volume_size = 10
-//      volume_type = "gp2"
-//      volume_iops = null
-//      volume_count = 1
-//    }
-//  ]
-}

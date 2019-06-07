@@ -1,23 +1,22 @@
+module "server_group_1" {
+  source = "./modules/server-group"
 
+  group_number = 1
+  enable = var.server_group_1_node_count > 0
 
-module "server_group_0" {
-  source = "./modules/server-resources"
+  availability_zone = var.availability_zones[var.server_group_1_subnet_index % length(var.availability_zones)]
+  subnet_id = var.private_subnet_ids[var.server_group_1_subnet_index % length(var.private_subnet_ids)]
 
-  enable = true
-  group_number = 0
+  node_count = var.server_group_1_node_count
+  volume_size = var.server_group_1_volume_size
+  volume_type = var.server_group_1_volume_type
+  volume_iops = var.server_group_1_volume_iops
+  volume_encrypted = var.server_group_1_volume_encrypted
+  volume_count = var.server_group_1_volume_count
+  instance_type = var.server_group_1_instance_type
 
+  // <editor-fold desc="Do not modify these values">
   marklogic_admin_password = var.marklogic_admin_password
-
-  availability_zone = var.availability_zones[0 % length(var.availability_zones)]
-  subnet_id = var.private_subnet_ids[0 % length(var.private_subnet_ids)]
-
-  node_count = lookup(var.server_groups[0], "node_count", 1)
-  volume_size = lookup(var.server_groups[0], "volume_size", 10)
-  volume_type = lookup(var.server_groups[0], "volume_type", "gp2")
-  volume_iops = lookup(var.server_groups[0], "volume_iops", 100)
-  volume_encrypted = lookup(var.server_groups[0], "volume_encrypted", false)
-  volume_count = lookup(var.server_groups[0], "volume_count", 1)
-  instance_type = lookup(var.server_groups[0], "instance_type", "t3.small")
 
   instance_security_group_id = aws_security_group.instance_security_group.id
   instance_host_profile_name = aws_iam_instance_profile.instance_host_profile.name
@@ -40,4 +39,6 @@ module "server_group_0" {
     aws_lambda_function.node_manager_function.*.arn,
     aws_lambda_permission.node_manager_invoke_permission.*.id,
   ]
+  // </editor-fold>
 }
+
