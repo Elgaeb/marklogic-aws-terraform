@@ -1,0 +1,76 @@
+variable "amis" {
+  description = "MarkLogic AMIs by region"
+  type        = "map"
+
+  default = {
+    // <editor-fold desc="MarkLogic 9.0-9.1 AMIs">
+    "v9.0-9.1.us-east-1.enterprise"      = "ami-0004b449f1081f1d9"
+    "v9.0-9.1.us-east-1.byol"            = "ami-08ffa9952f7b0e2fe"
+    "v9.0-9.1.us-east-2.enterprise"      = "ami-0d3df3072fbf3d239"
+    "v9.0-9.1.us-east-2.byol"            = "ami-046e17d4536ace88c"
+    "v9.0-9.1.us-west-1.enterprise"      = "ami-0b0a553d3a5daa468"
+    "v9.0-9.1.us-west-1.byol"            = "ami-097ef4a918e62c952"
+    "v9.0-9.1.us-west-2.enterprise"      = "ami-012951e1864920579"
+    "v9.0-9.1.us-west-2.byol"            = "ami-0a8d80a5367655adf"
+    "v9.0-9.1.eu-central-1.enterprise"   = "ami-097cffe8c24d29ebc"
+    "v9.0-9.1.eu-central-1.byol"         = "ami-05a5ab8a5ec63837e"
+    "v9.0-9.1.eu-west-1.enterprise"      = "ami-0816b17b598804a4e"
+    "v9.0-9.1.eu-west-1.byol"            = "ami-0042586977c058812"
+    "v9.0-9.1.ap-south-1.enterprise"     = "ami-0713b92aa3834cf87"
+    "v9.0-9.1.ap-south-1.byol"           = "ami-0adefbdd1b6b4c4d2"
+    "v9.0-9.1.ap-southeast-1.enterprise" = "ami-03064b571404fd1ca"
+    "v9.0-9.1.ap-southeast-1.byol"       = "ami-021f15fa5b57c4b09"
+    "v9.0-9.1.ap-southeast-2.enterprise" = "ami-06e6a6ae435b897d8"
+    "v9.0-9.1.ap-southeast-2.byol"       = "ami-0b35d6a43c7e8057b"
+    "v9.0-9.1.ap-northeast-1.enterprise" = "ami-013d8d8da1532753e"
+    "v9.0-9.1.ap-northeast-1.byol"       = "ami-0e3d01da785139a18"
+    "v9.0-9.1.ap-northeast-2.enterprise" = "ami-0063b0d018835b2d5"
+    "v9.0-9.1.ap-northeast-2.byol"       = "ami-0ead19500e8ebdeb3"
+    "v9.0-9.1.sa-east-1.enterprise"      = "ami-0069f91e3f46020ec"
+    "v9.0-9.1.sa-east-1.byol"            = "ami-0b6da6963ea03cfea"
+    "v9.0-9.1.eu-west-2.enterprise"      = "ami-0a4c000ede045a037"
+    "v9.0-9.1.eu-west-2.byol"            = "ami-073941dc2266a373d"
+    "v9.0-9.1.ca-central-1.enterprise"   = "ami-0a027410ae54421fe"
+    "v9.0-9.1.ca-central-1.byol"         = "ami-058b813db3fbe01c7"
+    "v9.0-9.1.eu-west-3.enterprise"      = "ami-05af786bcb3ce0002"
+    "v9.0-9.1.eu-west-3.byol"            = "ami-0aa5f39e9e66c4e8c"
+    "v9.0-9.1.us-gov-west-1.enterprise"  = null
+    "v9.0-9.1.us-gov-west-1.byol"        = null
+    // </editor-fold>
+
+    // <editor-fold desc="MarkLogic "9.0-8" AMIs">
+    "v9.0-8.us-east-1.enterprise"      = "ami-0cd873f9b5dbbe54c"
+    "v9.0-8.us-east-1.byol"            = "ami-0d77ce6990428613f"
+    "v9.0-8.us-east-2.enterprise"      = "ami-0e04f31930f7f8d05"
+    "v9.0-8.us-east-2.byol"            = "ami-0cf880d594b0ce4de"
+    "v9.0-8.us-west-1.enterprise"      = "ami-01d0d25b2732378b1"
+    "v9.0-8.us-west-1.byol"            = "ami-074db326064ccddbd"
+    "v9.0-8.us-west-2.enterprise"      = "ami-063958e84eee7b4cd"
+    "v9.0-8.us-west-2.byol"            = "ami-0f5da6468457979f6"
+    "v9.0-8.eu-central-1.enterprise"   = "ami-0624c5d8c3c9c4f29"
+    "v9.0-8.eu-central-1.byol"         = "ami-014acd3f00b3c20ef"
+    "v9.0-8.eu-west-1.enterprise"      = "ami-01444ac8e6dc4ade1"
+    "v9.0-8.eu-west-1.byol"            = "ami-0ef97ede729f7af74"
+    "v9.0-8.ap-south-1.enterprise"     = "ami-0f98173fbc40896cd"
+    "v9.0-8.ap-south-1.byol"           = "ami-03eda65e8fcb7757f"
+    "v9.0-8.ap-southeast-1.enterprise" = "ami-09384752c92c31088"
+    "v9.0-8.ap-southeast-1.byol"       = "ami-090e04d1c0f7d9ccd"
+    "v9.0-8.ap-southeast-2.enterprise" = "ami-0f4e383a94dfac906"
+    "v9.0-8.ap-southeast-2.byol"       = "ami-00a45f49456220653"
+    "v9.0-8.ap-northeast-1.enterprise" = "ami-0a192803d42a10633"
+    "v9.0-8.ap-northeast-1.byol"       = "ami-0cfeab5f94399859f"
+    "v9.0-8.ap-northeast-2.enterprise" = "ami-0960d223a6bba5d17"
+    "v9.0-8.ap-northeast-2.byol"       = "ami-06b7a50dac858f326"
+    "v9.0-8.sa-east-1.enterprise"      = "ami-09206693bcf8e33ed"
+    "v9.0-8.sa-east-1.byol"            = "ami-017aed992876cd5c4"
+    "v9.0-8.eu-west-2.enterprise"      = "ami-0fbe07b179c427f75"
+    "v9.0-8.eu-west-2.byol"            = "ami-0da44368227f44710"
+    "v9.0-8.ca-central-1.enterprise"   = "ami-0f9e4fe7475d2a280"
+    "v9.0-8.ca-central-1.byol"         = "ami-0aee3dfa1dcbf7636"
+    "v9.0-8.eu-west-3.enterprise"      = "ami-0923d3ceab261d093"
+    "v9.0-8.eu-west-3.byol"            = "ami-0a64de09d0f5f2218"
+    "v9.0-8.us-gov-west-1.enterprise"  = null
+    "v9.0-8.us-gov-west-1.byol"        = null
+    // </editor-fold>
+  }
+}

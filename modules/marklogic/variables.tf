@@ -18,6 +18,17 @@ variable "aws_region" {
   default     = "us-east-1"
 }
 
+variable "availability_zones" {
+  type = "list"
+
+  default = [
+    "us-east-1a",
+    "us-east-1b",
+    "us-east-1c"
+  ]
+}
+
+
 variable "instance_type" {
   type    = "string"
   default = "r5.4xlarge"
@@ -162,4 +173,19 @@ variable "enable_odbc" {
 
 variable "odbc_port" {
   default = 5432
+}
+
+variable "server_groups" {
+  type = "list"
+//  default = [
+//    {
+//      subnet_index = 0
+//      node_count = 1
+//      instance_type = "t3.small"
+//      volume_size = 10
+//      volume_type = "gp2"
+//      volume_iops = null
+//      volume_count = 1
+//    }
+//  ]
 }

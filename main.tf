@@ -86,15 +86,15 @@ module "marklogic" {
   cluster_name = var.cluster_name
   cluster_id = var.cluster_id
   aws_region = var.aws_region
+  availability_zones = var.azs
   number_of_zones = var.number_of_zones
-  nodes_per_zone = var.nodes_per_zone
 
-  instance_type = var.instance_type
-  volume_size = var.volume_size
-  volume_type = var.volume_type
-  volume_count = var.volume_count
-  volume_iops = var.volume_iops
-  volume_encrypted = var.volume_encrypted
+//  instance_type = var.instance_type
+//  volume_size = var.volume_size
+//  volume_type = var.volume_type
+//  volume_count = var.volume_count
+//  volume_iops = var.volume_iops
+//  volume_encrypted = var.volume_encrypted
 
   expose_administration_console = var.expose_administration_console
 
@@ -110,5 +110,8 @@ module "marklogic" {
   vpc_id             = local.vpc_id
   public_subnet_ids  = local.public_subnet_ids
   private_subnet_ids = local.private_subnet_ids
+
+
+  server_groups = var.server_groups
 
 }

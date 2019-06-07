@@ -40,7 +40,6 @@ Licensing, either Essential Enterprise or BYOL is also configurable.
 | volume_type | The EBS volume type: standard, gp2, or io1. | "gp2" |
 | volume_iops | For io1 volumes only, the provisioned IOP (PIOP) | |
 | number_of_zones | The number of availability zones to use for MarkLogic nodes. | 3 |
-| nodes_per_zone | The number of MarkLogic nodes to create per availability zone. | 1 |
 | azs | A list of availability zones to use. This must be the same length as number_of_zones. | [ "us-east-1a", "us-east-1b", "us-east-1c" ] |
 | enable_ops_director | If true, create the required security rules for ops director. | false |
 | enable_data_hub | If true, create the required security rules for MarkLogic Data Hub. | true |

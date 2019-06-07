@@ -1,3 +1,18 @@
+resource "aws_dynamodb_table" "marklogic_ddb_table" {
+  count = "${var.enable_marklogic ? 1 : 0}"
+
+  name = "${var.cluster_name}"
+
+  attribute {
+    name = "node"
+    type = "S"
+  }
+
+  hash_key       = "node"
+  read_capacity  = 10
+  write_capacity = 10
+}
+
 data "aws_iam_policy_document" "node_manager_exec_assume_role_policy" {
   statement {
     actions = ["sts:AssumeRole"]
@@ -79,12 +94,7 @@ resource "aws_lambda_function" "node_manager_function" {
   count = "${var.enable_marklogic ? 1 : 0}"
 
   depends_on = [
-    aws_network_interface.managed_eni_group_1,
-    aws_network_interface.managed_eni_group_2,
-    aws_network_interface.managed_eni_group_3,
-    aws_network_interface.managed_eni_group_4,
-    aws_network_interface.managed_eni_group_5,
-    aws_network_interface.managed_eni_group_6,
+    aws_dynamodb_table.marklogic_ddb_table
   ]
 
   function_name = "${var.cluster_name}-node_manager_function"

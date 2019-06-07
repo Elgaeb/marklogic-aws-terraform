@@ -1,6 +1,4 @@
 locals {
-  node_counts = flatten( [ var.nodes_per_zone ] )
-
   // aws_security_group_rule
   // icmp, tcp, udp, all, or protocol num
 
