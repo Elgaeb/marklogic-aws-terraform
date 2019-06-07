@@ -44,35 +44,6 @@ variable "key_name" {
   default     = ""
 }
 
-variable "volume_size" {
-  description = "The size of the EBS volumes in GB"
-  type    = "string"
-  default = 10
-}
-
-variable "volume_count" {
-  description = "The number of volumes per node to use for MarkLogic data"
-  type = "string"
-  default = 1
-}
-
-variable "volume_type" {
-  description = "The EBS volume type: standard, gp2, or io1"
-  type    = "string"
-  default = "gp2"
-}
-
-variable "volume_iops" {
-  description = "For io1 volumes only, the provisioned IOP (PIOP)"
-  type = "string"
-  default = "100"
-}
-
-variable "volume_encrypted" {
-  type = "string"
-  default = "false"
-}
-
 variable "cluster_name" {
   type    = "string"
 }

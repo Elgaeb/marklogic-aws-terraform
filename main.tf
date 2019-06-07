@@ -113,6 +113,7 @@ module "marklogic" {
   server_group_0_volume_type = var.server_group_0_volume_type
   server_group_0_volume_iops = var.server_group_0_volume_iops
   server_group_0_volume_encrypted = var.server_group_0_volume_encrypted
+  server_group_0_volume_kms_key_id = var.server_group_0_volume_kms_key_id
   server_group_0_volume_count = var.server_group_0_volume_count
 
   server_group_1_subnet_index = var.server_group_1_subnet_index
@@ -122,6 +123,7 @@ module "marklogic" {
   server_group_1_volume_type = var.server_group_1_volume_type
   server_group_1_volume_iops = var.server_group_1_volume_iops
   server_group_1_volume_encrypted = var.server_group_1_volume_encrypted
+  server_group_1_volume_kms_key_id = var.server_group_1_volume_kms_key_id
   server_group_1_volume_count = var.server_group_1_volume_count
 
   server_group_2_subnet_index = var.server_group_2_subnet_index
@@ -131,6 +133,7 @@ module "marklogic" {
   server_group_2_volume_type = var.server_group_2_volume_type
   server_group_2_volume_iops = var.server_group_2_volume_iops
   server_group_2_volume_encrypted = var.server_group_2_volume_encrypted
+  server_group_2_volume_kms_key_id = var.server_group_2_volume_kms_key_id
   server_group_2_volume_count = var.server_group_2_volume_count
 
   server_group_3_subnet_index = var.server_group_3_subnet_index
@@ -140,6 +143,7 @@ module "marklogic" {
   server_group_3_volume_type = var.server_group_3_volume_type
   server_group_3_volume_iops = var.server_group_3_volume_iops
   server_group_3_volume_encrypted = var.server_group_3_volume_encrypted
+  server_group_3_volume_kms_key_id = var.server_group_3_volume_kms_key_id
   server_group_3_volume_count = var.server_group_3_volume_count
 
   server_group_4_subnet_index = var.server_group_4_subnet_index
@@ -149,6 +153,7 @@ module "marklogic" {
   server_group_4_volume_type = var.server_group_4_volume_type
   server_group_4_volume_iops = var.server_group_4_volume_iops
   server_group_4_volume_encrypted = var.server_group_4_volume_encrypted
+  server_group_4_volume_kms_key_id = var.server_group_4_volume_kms_key_id
   server_group_4_volume_count = var.server_group_4_volume_count
 
   server_group_5_subnet_index = var.server_group_5_subnet_index
@@ -158,5 +163,6 @@ module "marklogic" {
   server_group_5_volume_type = var.server_group_5_volume_type
   server_group_5_volume_iops = var.server_group_5_volume_iops
   server_group_5_volume_encrypted = var.server_group_5_volume_encrypted
+  server_group_5_volume_kms_key_id = var.server_group_5_volume_kms_key_id
   server_group_5_volume_count = var.server_group_5_volume_count
 }

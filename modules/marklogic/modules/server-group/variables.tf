@@ -48,6 +48,10 @@ variable "volume_encrypted" {
   default = false
 }
 
+variable "volume_kms_key_id" {
+  default = null
+}
+
 variable "volume_count" {
   default = 1
 }

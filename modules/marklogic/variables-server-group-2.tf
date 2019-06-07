@@ -32,6 +32,11 @@ variable "server_group_2_volume_encrypted" {
   default = false
 }
 
+variable "server_group_2_volume_kms_key_id" {
+  type = string
+  default = null
+}
+
 variable "server_group_2_volume_count" {
   type = number
   default = 1

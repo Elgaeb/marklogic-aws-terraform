@@ -25,6 +25,7 @@ module "volume_0" {
   volume_type = var.volume_type
   volume_iops = var.volume_iops
   volume_encrypted = var.volume_encrypted
+  volume_kms_key_id = var.volume_kms_key_id
   volume_count = var.volume_count
 }
 
@@ -43,6 +44,7 @@ module "volume_1" {
   volume_type = var.volume_type
   volume_iops = var.volume_iops
   volume_encrypted = var.volume_encrypted
+  volume_kms_key_id = var.volume_kms_key_id
   volume_count = var.volume_count
 }
 
@@ -61,6 +63,7 @@ module "volume_2" {
   volume_type = var.volume_type
   volume_iops = var.volume_iops
   volume_encrypted = var.volume_encrypted
+  volume_kms_key_id = var.volume_kms_key_id
   volume_count = var.volume_count
 }
 
@@ -79,6 +82,7 @@ module "volume_3" {
   volume_type = var.volume_type
   volume_iops = var.volume_iops
   volume_encrypted = var.volume_encrypted
+  volume_kms_key_id = var.volume_kms_key_id
   volume_count = var.volume_count
 }
 
@@ -97,6 +101,7 @@ module "volume_4" {
   volume_type = var.volume_type
   volume_iops = var.volume_iops
   volume_encrypted = var.volume_encrypted
+  volume_kms_key_id = var.volume_kms_key_id
   volume_count = var.volume_count
 }
 
@@ -115,6 +120,7 @@ module "volume_5" {
   volume_type = var.volume_type
   volume_iops = var.volume_iops
   volume_encrypted = var.volume_encrypted
+  volume_kms_key_id = var.volume_kms_key_id
   volume_count = var.volume_count
 }
 
@@ -133,6 +139,7 @@ module "volume_6" {
   volume_type = var.volume_type
   volume_iops = var.volume_iops
   volume_encrypted = var.volume_encrypted
+  volume_kms_key_id = var.volume_kms_key_id
   volume_count = var.volume_count
 }
 
@@ -151,6 +158,7 @@ module "volume_7" {
   volume_type = var.volume_type
   volume_iops = var.volume_iops
   volume_encrypted = var.volume_encrypted
+  volume_kms_key_id = var.volume_kms_key_id
   volume_count = var.volume_count
 }
 
@@ -169,6 +177,7 @@ module "volume_8" {
   volume_type = var.volume_type
   volume_iops = var.volume_iops
   volume_encrypted = var.volume_encrypted
+  volume_kms_key_id = var.volume_kms_key_id
   volume_count = var.volume_count
 }
 
@@ -187,6 +196,7 @@ module "volume_9" {
   volume_type = var.volume_type
   volume_iops = var.volume_iops
   volume_encrypted = var.volume_encrypted
+  volume_kms_key_id = var.volume_kms_key_id
   volume_count = var.volume_count
 }
 

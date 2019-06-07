@@ -12,6 +12,7 @@ module "server_group_3" {
   volume_type = var.server_group_3_volume_type
   volume_iops = var.server_group_3_volume_iops
   volume_encrypted = var.server_group_3_volume_encrypted
+  volume_kms_key_id = var.server_group_3_volume_kms_key_id
   volume_count = var.server_group_3_volume_count
   instance_type = var.server_group_3_instance_type
 
