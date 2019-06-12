@@ -1,55 +1,90 @@
 # MarkLogic Cluster
 
-These Terraform scripts will create a managed MarkLogic cluster inside of an existing
-VPC. The cluster is configured so that the instances are inside of an autoscaling group.
-Additional functionality is provided that will rejoin a server to the cluster when
-the autoscaling group detects a terminated instance and creates a new instance.
+These Terraform scripts will create a managed MarkLogic cluster either inside of an existing VPC or in a new VPC. The cluster is configured so that the instances are inside of an autoscaling group. Additional functionality is provided that will rejoin a server to the cluster when the autoscaling group detects a terminated instance and creates a new instance.
 
-The cluster is configurable to span multiple availability zones, with a configurable number
-of instances per availability zone.
+The cluster is configurable to span multiple availability zones, with a configurable number of instances per availability zone.
 
 Licensing, either Essential Enterprise or BYOL is also configurable.
 
-## Variables
+## Requirements
 
-### Required Variables
+* Terraform 0.12+
+* AWS Credentials with an access key and secret key
+    * You will need a comprehensive set of permissions to run these scripts, including the ability to create IAM roles
+* An SSH key associated with your AWS account.
 
-| Variable | Description | Default |
-|----------|-------------|---------|
-| access_key | The AWS access key | |
-| secret_key | The AWS secret key. | |
-| key_name | The key to use for ssh access to the MarkLogic instances | |
-| cluster_name | The name of the cluster, this will be used to tag the managed ENI resources | |
-| cluster_id | The ID of the cluster. This will be used to tag the managed ENI resources and should be unique. It is recommended to use a UUID. | |
-| bastion_key_name | The key to use for ssh access to the bastion instances | |
-| ingestion_key_name | The key to use for ssh access to the ingestion instance | |
+## TL;DR
 
-### Optional Variables
+1. Copy `sample.tfvars`  to `terraform.tfvars`
+2. Follow the guidance in `terraform.tfvars` to set the proper values. Set `expose_administration_console` to `true`.
+3. Run the following commands
+    ```bash
+    terraform init
+    terraform apply 
+    ```
+    
+The previous command will create output similar to:
 
-*NEVER SET enable_marklogic TO false, it will destroy the MarkLogic instance and ALL data*
-
-
-| Variable | Description | Default |
-|----------|-------------|---------|
-| marklogic_version | The version of MarkLogic to use | 9.0-9.1 |
-| licensee_key | The MarkLogic license key, leave blank for Essential Enterprise or "none" for developer. | "none" |
-| licensee | The MarkLogic licensee, leave blank for Essential Enterprise or "none" for developer. | "none" |
-| aws_region | The AWS region of the VPC. | "us-east-1" |
-| instance_type | The type of instance to use for MarkLogic nodes. | "r3.4xlarge" |
-| volume_size | The size of the EBS volumes to use for MarkLogic data, in GiB | 10 |
-| volume_type | The EBS volume type: standard, gp2, or io1. | "gp2" |
-| volume_iops | For io1 volumes only, the provisioned IOP (PIOP) | |
-| number_of_zones | The number of availability zones to use for MarkLogic nodes. | 3 |
-| azs | A list of availability zones to use. This must be the same length as number_of_zones. | [ "us-east-1a", "us-east-1b", "us-east-1c" ] |
-| enable_ops_director | If true, create the required security rules for ops director. | false |
-| enable_data_hub | If true, create the required security rules for MarkLogic Data Hub. | true |
-| expose_administration_console | If true, expose the administration, query console, ops director (if enabled), and management servers through the load balancer. | false |
-| enable_external_access | Whether to enable external access to the cluster through the ELB. You should set this to false during an upgrade. | true |
-| enable_marklogic | Whether to create the MarkLogic components. Setting this to false will destroy all of the MarkLogic security groups, instances, and volumes. It will not destroy the ELBs. | true |
-| bastion_instance_type | The type of instance to use for the bastion instance | t3.nano |
-| ingestion_instance_type | The type of instance to use for the ingestion instance | c5.4xlarge |
-
-```bash
-$ terraform init
-$ terraform plan
+```hcl-terraform
+bastion = [
+  {
+    "private_dns" = "ip-10-0-96-41.ec2.internal"
+    "private_ip_address" = "10.0.96.41"
+    "public_dns" = "ec2-54-167-34-23.compute-1.amazonaws.com"
+    "public_ip_address" = "54.167.34.23"
+  },
+]
+ingestion = [
+  {
+    "private_dns" = "ip-10-0-0-238.ec2.internal"
+    "private_ip_address" = "10.0.0.238"
+    "public_dns" = ""
+    "public_ip_address" = ""
+  },
+]
+marklogic = [
+  {
+    "instance_security_group_id" = "sg-0fb1f2349f65a15b6"
+    "internal_url" = "http://ml-demo-cluster-internal-elb-121195148.us-east-1.elb.amazonaws.com:8001"
+    "managed_eni_private_dns" = [
+      [
+        "ip-10-0-0-79.ec2.internal",
+      ],
+    ]
+    "managed_eni_private_ips" = [
+      [
+        "10.0.0.79",
+      ],
+    ]
+    "url" = "http://ml-demo-cluster-external-elb-627899900.us-east-1.elb.amazonaws.com:8001"
+  },
+]
+private_subnet_ids = [
+  "subnet-005959f9c031f3788",
+]
+public_subnet_ids = [
+  "subnet-076264cbc0b9c5f2b",
+]
+vpc = [
+  {
+    "default_security_group_id" = "sg-05a05d377e8e957ac"
+    "nat_ip" = "3.215.48.119"
+    "private_subnet_ids" = [
+      "subnet-005959f9c031f3788",
+    ]
+    "public_subnet_ids" = [
+      "subnet-076264cbc0b9c5f2b",
+    ]
+    "vpc_cidr_block" = "10.0.0.0/16"
+    "vpc_id" = "vpc-08558c6fad5ce588f"
+  },
+]
+vpc_cidr = 10.0.0.0/16
+vpc_id = vpc-08558c6fad5ce588f
 ```
+
+To access the administration col=nsole, visit the url specified by `marklogic.url`, you can change the port to access the other services (e.g. 8000 for query console.)
+
+If you want to SSH to your marklogic servers, you will need to first SSH to the bastino server using the command `ssh ec2-user@ec2-54-167-34-23.compute-1.amazonaws.com`, replacing the server with the appropriate dns name or ip for you bastion server. You also need to add your SSH key using the `ssh-add` command, e.g. `ssh-add ~/.ssh/my-key.pem`
+
+When you are finished, you can run `terraform destroy` to permanently remove the cluster (and vpc.)    
