@@ -68,7 +68,7 @@ variable "licensee_key" {
 
 variable "marklogic_version" {
   type    = "string"
-  default = "9.0-9.1"
+  default = "9.0-9.3"
 }
 
 variable "instance_type" {

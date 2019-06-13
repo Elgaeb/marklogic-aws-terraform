@@ -6,90 +6,121 @@ The cluster is configurable to span multiple availability zones, with a configur
 
 Licensing, either Essential Enterprise or BYOL is also configurable.
 
-## Requirements
+## Pre-requirements
 
-* Terraform 0.12+
+* [Terraform](https://www.terraform.io) 0.12+
 * AWS Credentials with an access key and secret key
     * You will need a comprehensive set of permissions to run these scripts, including the ability to create IAM roles
 * An SSH key associated with your AWS account.
+* You need to have subscribed to MarkLogic in the AWS Marketplace. You can do that from [here](https://aws.amazon.com/marketplace/pp/B072Z536VB?ref=cns_srchrow).
 
-# TL;DR
+# What Is It?
 
-1. Copy `sample.tfvars`  to `terraform.tfvars`
-2. Follow the guidance in `terraform.tfvars` to set the proper values. Set `expose_administration_console` to `true`.
-3. Run the following commands
-    ```bash
-    terraform init
-    terraform apply 
-    ```
-    
-The previous command will create output similar to:
+These scripts will create and manage a cluster of MarkLogic servers in an AWS VPC.
 
-```hcl-terraform
-bastion = [
-  {
-    "private_dns" = "ip-10-0-96-41.ec2.internal"
-    "private_ip_address" = "10.0.96.41"
-    "public_dns" = "ec2-54-167-34-23.compute-1.amazonaws.com"
-    "public_ip_address" = "54.167.34.23"
-  },
-]
-ingestion = [
-  {
-    "private_dns" = "ip-10-0-0-238.ec2.internal"
-    "private_ip_address" = "10.0.0.238"
-    "public_dns" = ""
-    "public_ip_address" = ""
-  },
-]
-marklogic = [
-  {
-    "instance_security_group_id" = "sg-0fb1f2349f65a15b6"
-    "internal_url" = "http://ml-demo-cluster-internal-elb-121195148.us-east-1.elb.amazonaws.com:8001"
-    "managed_eni_private_dns" = [
-      [
-        "ip-10-0-0-79.ec2.internal",
-      ],
-    ]
-    "managed_eni_private_ips" = [
-      [
-        "10.0.0.79",
-      ],
-    ]
-    "url" = "http://ml-demo-cluster-external-elb-627899900.us-east-1.elb.amazonaws.com:8001"
-  },
-]
-private_subnet_ids = [
-  "subnet-005959f9c031f3788",
-]
-public_subnet_ids = [
-  "subnet-076264cbc0b9c5f2b",
-]
-vpc = [
-  {
-    "default_security_group_id" = "sg-05a05d377e8e957ac"
-    "nat_ip" = "3.215.48.119"
-    "private_subnet_ids" = [
-      "subnet-005959f9c031f3788",
-    ]
-    "public_subnet_ids" = [
-      "subnet-076264cbc0b9c5f2b",
-    ]
-    "vpc_cidr_block" = "10.0.0.0/16"
-    "vpc_id" = "vpc-08558c6fad5ce588f"
-  },
-]
-vpc_cidr = 10.0.0.0/16
-vpc_id = vpc-08558c6fad5ce588f
-```
+Some of the features of the scripts include:
 
-To access the administration col=nsole, visit the url specified by `marklogic.url`, you can change the port to access the other services (e.g. 8000 for query console.)
+* Optionally can create a new VPC in your AWS account, or use an existing VPC.
+* Create up to 6 groups of nodes. Each group can contain up to 200 homogeneous nodes on a single VPC subnet. _(TODO: expand this concept so that a single group can span multiple availability zones)_
+* Optionally create a [bastion host](https://en.wikipedia.org/wiki/Bastion_host) for the VPC.
+* Optionally create an ingestion server, a general purpose instance inside the VPC for performing tasks such as [MLCP](https://developer.marklogic.com/products/mlcp) ingestion.
 
-If you want to SSH to your marklogic servers, you will need to first SSH to the bastino server using the command `ssh ec2-user@ec2-54-167-34-23.compute-1.amazonaws.com`, replacing the server with the appropriate dns name or ip for you bastion server. You also need to add your SSH key using the `ssh-add` command, e.g. `ssh-add ~/.ssh/my-key.pem`
+# Configuration
 
-When you are finished, you can run `terraform destroy` to permanently remove the cluster (and vpc.)    
+All configuration can be achieved through [input variables](https://learn.hashicorp.com/terraform/getting-started/variables.html), e.g. a `terraform.tfvars` file. A `sample.tfvars` file is include to demonstrate the creation of a small cluster in a new VPC.
 
-# [Terraform](https://www.terraform.io)
+## General Variables
+
+| Variable | Description | Default Value |
+|----------|-------------|---------------|
+| access_key | The access key for the AWS account | |
+| secret_key |  |  |
+| cluster_name |  |  |
+| cluster_id |  |  |
+| marklogic_version |  |  |
+| licensee |  |  |
+| licensee_key |  |  |
+
+## VPC Variables
+
+| Variable | Description | Default Value |
+|----------|-------------|---------------|
+| create_vpc |  |  |
+| aws_region |  |  |
+| azs |  |  |
+| number_of_zones |  |  |
+
+### Existing VPC Variables
+
+| Variable | Description | Default Value |
+|----------|-------------|---------------|
+| vpc_cidr |  |  |
+| vpc_id |  |  |
+| public_subnet_ids |  |  |
+| private_subnet_ids |  |  |
+
+## MarkLogic Server Group Variables
+
+| Variable | Description | Default Value |
+|----------|-------------|---------------|
+| server_group_0_subnet_index |  |  |
+| server_group_0_node_count |  |  |
+| server_group_0_instance_type |  |  |
+| server_group_0_volume_size |  |  |
+| server_group_0_volume_type |  |  |
+| server_group_0_volume_iops |  |  |
+| server_group_0_volume_count |  |  |
+| server_group_0_volume_encrypted |  |  |
 
 
+## MarkLogic Variables
 
+| Variable | Description | Default Value |
+|----------|-------------|---------------|
+| expose_administration_console |  |  |
+| enable_ops_director |  |  |
+| enable_data_explorer |  |  |
+| enable_data_hub |  |  |
+| enable_grove |  |  |
+| enable_odbc |  |  |
+| enable_marklogic |  |  |
+|  |  |  |
+|  |  |  |
+|  |  |  |
+|  |  |  |
+|  |  |  |
+
+## Bastion Host Variables
+
+| Variable | Description | Default Value |
+|----------|-------------|---------------|
+|  |  |  |
+|  |  |  |
+|  |  |  |
+|  |  |  |
+|  |  |  |
+
+## Ingestion Host Variables
+
+| Variable | Description | Default Value |
+|----------|-------------|---------------|
+|  |  |  |
+|  |  |  |
+|  |  |  |
+|  |  |  |
+|  |  |  |
+
+# Upgrading MarkLogic
+
+Upgrading marklogic is fairly straightforward:
+
+1. In your Terraform variables, change the version of MarkLogic to de desired, supported version, e.g. `marklogic_version = "9.0-9.3"`. Currently supported versions include:
+    * 9.0-8
+    * 9.0-9.1
+    * 9.0-9.3
+2. Run `terraform apply`
+3. For a rolling upgrade (and as a good practice) terminate other nodes one by one starting with the node that has the Security database. They will come up and reconnect without any UI interaction.
+4. Go to 8001 port on any new instance where an upgrade prompt should be displayed.
+5. Click OK and wait for the upgrade to complete on the instance.
+
+If you have modified the Terraform scripts, upgrading should follow the same process, but you will need to copy the `modules/marklogic/modules/server-group/variables-amis.tf` file to your modified project to get the AMI ids of the new MarkLogic AMIs.

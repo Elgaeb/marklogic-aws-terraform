@@ -12,7 +12,7 @@ aws_region      = "us-east-1"
 azs             = ["us-east-1a", "us-east-1b", "us-east-1c", ]
 number_of_zones = 3
 
-marklogic_version = "9.0-9.1"
+marklogic_version = "9.0-9.3"
 licensee     = "none"
 licensee_key = "none"
 

@@ -1,0 +1,1 @@
+https://s3.amazonaws.com/marklogic-lambda-us-east-1/9.0-9.3/node_manager.zip

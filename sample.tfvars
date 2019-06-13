@@ -12,7 +12,7 @@ cluster_id     = "random-string"
 
 # The marklogic version to use and license information. If both licensee and license_key are set to "none" this cluster
 # will use a developer license. If the are both set to "" (the empty string) it will use MarkLogic Enterprise Edition.
-marklogic_version = "9.0-9.1"
+marklogic_version = "9.0-9.3"
 licensee     = "none"
 licensee_key = "none"
 

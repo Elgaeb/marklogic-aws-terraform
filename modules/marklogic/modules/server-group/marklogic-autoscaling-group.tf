@@ -109,6 +109,12 @@ resource "aws_autoscaling_group" "marklogic_server_group" {
   }
 
   tag {
+    key                 = "MarkLogic Version"
+    value               = var.marklogic_version
+    propagate_at_launch = true
+  }
+
+  tag {
     key                 = "Name"
     value               = "${var.cluster_name}-${var.group_number}_Node${var.group_number + 1}"
     propagate_at_launch = true
