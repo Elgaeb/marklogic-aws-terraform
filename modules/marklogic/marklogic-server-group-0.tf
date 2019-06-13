@@ -31,7 +31,7 @@ module "server_group_0" {
   marklogic_version = var.marklogic_version
 
   key_name = var.key_name
-  load_balancer_names = [ aws_elb.external_elb.name, aws_elb.internal_elb.name ]
+  load_balancer_names = flatten([ aws_elb.external_elb.*.name, aws_elb.internal_elb.name ])
 
   node_manager_exec_role_arn = aws_iam_role.node_manager_exec_role[0].arn
   node_manager_sns_topic_arn = aws_sns_topic.node_manager_sns_topic[0].arn

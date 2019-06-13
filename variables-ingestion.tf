@@ -25,7 +25,7 @@ variable "ingestion_tenancy" {
 }
 
 variable "ingestion_ebs_encrypted" {
-  default = true
+  default = false
 }
 
 variable "ingestion_root_block_device_size" {

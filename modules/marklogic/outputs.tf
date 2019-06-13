@@ -1,12 +1,10 @@
-output "url" {
-  value = "http://${aws_elb.external_elb.dns_name}:8001"
+output "marklogic_administration_url" {
+  value = [ for elb in aws_elb.external_elb: format("http://%s:8001", elb.dns_name) ]
 }
 
-output "internal_url" {
+output "marklogic_administration_internal_url" {
   value = "http://${aws_elb.internal_elb.dns_name}:8001"
 }
-
-
 
 output "managed_eni_private_ips" {
   value = [ for value in [

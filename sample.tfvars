@@ -15,6 +15,7 @@ cluster_id     = "random-string"
 marklogic_version = "9.0-9.3"
 licensee     = "none"
 licensee_key = "none"
+marklogic_admin_password = "admin"
 
 # Create a new VPC for the cluster.
 # When set to false, you need to specify vpc_cidr, vpc_id, public_subnet_ids, and public_subnet_ids.
@@ -85,6 +86,9 @@ enable_odbc = true
 
 # For internal use, this should never be set to false, doing so will destroy all your data.
 enable_marklogic = true
+
+# Whether to create an external, internet-facing load balancer
+enable_external_load_balancer = true
 
 # Define the parameters for a bastion server. This server will reside on a public subnet and be accessible.
 bastion_enable = true

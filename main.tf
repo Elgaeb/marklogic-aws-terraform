@@ -14,6 +14,12 @@ provider "template" {
   version = "~> 2.1"
 }
 
+
+locals {
+  private_subnet_cidrs = [ for netnum in range(0, tonumber(var.number_of_zones) * 2, 2): cidrsubnet(var.vpc_cidr, var.newbits_per_subnet, netnum) ]
+  public_subnet_cidrs = [ for netnum in range(1, tonumber(var.number_of_zones) * 2, 2): cidrsubnet(var.vpc_cidr, var.newbits_per_subnet, netnum) ]
+}
+
 module "vpc" {
   source = "./modules/vpc"
 
@@ -21,6 +27,10 @@ module "vpc" {
   aws_region            = var.aws_region
   azs                   = var.azs
   number_of_zones       = var.number_of_zones
+
+  vpc_cidr = var.vpc_cidr
+  public_subnet_cidrs = local.public_subnet_cidrs
+  private_subnet_cidrs = local.private_subnet_cidrs
 
   enable = var.create_vpc
 }
@@ -89,7 +99,6 @@ module "marklogic" {
   cluster_id = var.cluster_id
   aws_region = var.aws_region
   availability_zones = var.azs
-  number_of_zones = var.number_of_zones
 
   expose_administration_console = var.expose_administration_console
 
@@ -100,6 +109,8 @@ module "marklogic" {
   grove_port = var.grove_port
   enable_marklogic = var.enable_marklogic
   enable_ops_director = var.enable_ops_director
+
+  enable_external_load_balancer = var.enable_external_load_balancer
 
   vpc_cidr           = local.vpc_cidr
   vpc_id             = local.vpc_id

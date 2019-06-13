@@ -32,7 +32,6 @@ variable "availability_zones" {
   ]
 }
 
-
 variable "instance_type" {
   type    = "string"
   default = "r5.4xlarge"
@@ -50,14 +49,6 @@ variable "cluster_name" {
 
 variable "cluster_id" {
   type    = "string"
-}
-
-variable "number_of_zones" {
-  default = 3
-}
-
-variable "nodes_per_zone" {
-  default = 1
 }
 
 variable "log_sns_arn" {
@@ -150,3 +141,6 @@ variable "odbc_port" {
   default = 5432
 }
 
+variable "enable_external_load_balancer" {
+  default = true
+}

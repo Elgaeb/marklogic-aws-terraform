@@ -18,11 +18,6 @@ variable "marklogic_version" {
   default = "9.0-9.3"
 }
 
-variable "aws_region" {
-  description = "EC2 Region for the VPC"
-  default     = "us-east-1"
-}
-
 variable "instance_type" {
   type    = "string"
   default = "r5.4xlarge"
@@ -71,10 +66,6 @@ variable "cluster_id" {
   type    = "string"
 }
 
-variable "number_of_zones" {
-  default = 3
-}
-
 variable "nodes_per_zone" {
   default = 1
 }
@@ -83,16 +74,6 @@ variable "log_sns_arn" {
   description = "ARN of SNS Topic for logging - optional/advanced"
   type = "string"
   default = ""
-}
-
-variable "azs" {
-  type = "list"
-
-  default = [
-    "us-east-1a",
-    "us-east-1b",
-    "us-east-1c"
-  ]
 }
 
 variable "lambda_package_bucket_base" {
@@ -122,12 +103,12 @@ variable "enable_data_hub" {
 
 variable "enable_grove" {
   description = "If true, create the required security rules for MarkLogic Grove."
-  default = true
+  default = false
 }
 
 variable "enable_data_explorer" {
   description = "If true, create the required security rules for MarkLogic Data Explorer."
-  default = true
+  default = false
 }
 
 variable "expose_administration_console" {
@@ -161,4 +142,8 @@ variable "enable_odbc" {
 
 variable "odbc_port" {
   default = 5432
+}
+
+variable "enable_external_load_balancer" {
+  default = true
 }

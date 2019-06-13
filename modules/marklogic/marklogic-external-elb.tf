@@ -1,9 +1,13 @@
 locals {
   external_ports = [ for port in local.ports: port if port.ingress_enabled && port.external_lb ]
   external_http_ports = [ for port in local.ports: port if port.ingress_enabled && port.external_lb && (port.lb_protocol == "http" || port.lb_protocol == "https" ) ]
+
+  enable_external_load_balancer = var.enable_external_load_balancer ? 1 : 0
 }
 
 resource "aws_security_group" "external_elb_security_group" {
+  count = local.enable_external_load_balancer
+
   name        = "${var.cluster_name}-external_elb"
 
   description = "Security group for the external-facing load balancer"
@@ -41,10 +45,12 @@ resource "aws_security_group" "external_elb_security_group" {
 }
 
 resource "aws_elb" "external_elb" {
+  count = local.enable_external_load_balancer
+
   name = "${var.cluster_name}-external-elb"
 
   security_groups = [
-    aws_security_group.external_elb_security_group.id
+    aws_security_group.external_elb_security_group[0].id
   ]
 
   subnets = var.public_subnet_ids
@@ -83,10 +89,10 @@ resource "aws_elb" "external_elb" {
 }
 
 resource "aws_app_cookie_stickiness_policy" "external_elb_csp" {
-  count = length(local.external_http_ports)
+  count = local.enable_external_load_balancer * length(local.external_http_ports)
 
   name          = format("%s-external-elb-csp-%d", var.cluster_name, local.external_http_ports[count.index].lb_port)
-  load_balancer = aws_elb.external_elb.name
+  load_balancer = aws_elb.external_elb[0].name
   lb_port       = local.external_http_ports[count.index].lb_port
   cookie_name   = "SessionID"
 }
