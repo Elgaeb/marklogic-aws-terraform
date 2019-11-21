@@ -19,7 +19,7 @@ These scripts use a MarkLogic-supplied AMIs that are available in [AWS MarketPla
 
 # Pre-requirements
 
-* [Terraform](https://www.terraform.io) 0.12+
+* [Terraform](https://www.terraform.io) v0.12.16+
 * AWS Credentials with an access key and secret key
     * You will need a comprehensive set of permissions to run these scripts, including the ability to create IAM roles
 * An SSH key associated with your AWS account.

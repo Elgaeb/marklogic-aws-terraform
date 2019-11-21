@@ -8,7 +8,7 @@ Licensing, either Essential Enterprise or BYOL is also configurable.
 
 ## Requirements
 
-* Terraform 0.12+
+* [Terraform](https://www.terraform.io) v0.12.16+
 * AWS Credentials with an access key and secret key
     * You will need a comprehensive set of permissions to run these scripts, including the ability to create IAM roles
 * An SSH key associated with your AWS account.
