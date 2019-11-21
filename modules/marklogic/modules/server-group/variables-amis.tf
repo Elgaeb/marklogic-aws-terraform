@@ -3,6 +3,41 @@ variable "amis" {
   type        = "map"
 
   default = {
+    // <editor-fold desc="MarkLogic 10.0-2.1 AMIs">
+    "v10.0-2.1.us-east-1.enterprise"      = "ami-072ec2a77547f9ea5"
+    "v10.0-2.1.us-east-1.byol"            = "ami-0ade534db8b60a808"
+    "v10.0-2.1.us-east-2.enterprise"      = "ami-01cf2c036c33ece29"
+    "v10.0-2.1.us-east-2.byol"            = "ami-0785d0d3b8be3a50f"
+    "v10.0-2.1.us-west-1.enterprise"      = "ami-0202b9fe50ffe4ca7"
+    "v10.0-2.1.us-west-1.byol"            = "ami-0dfbde2e96e550432"
+    "v10.0-2.1.us-west-2.enterprise"      = "ami-031932618fae4c2b3"
+    "v10.0-2.1.us-west-2.byol"            = "ami-0bbd7ce6e998eeb02"
+    "v10.0-2.1.eu-central-1.enterprise"   = "ami-05fb73ae436f4cc53"
+    "v10.0-2.1.eu-central-1.byol"         = "ami-0e4a73dba06357e3e"
+    "v10.0-2.1.eu-west-1.enterprise"      = "ami-033498e07c823a88c"
+    "v10.0-2.1.eu-west-1.byol"            = "ami-02a3220855f8b0138"
+    "v10.0-2.1.ap-south-1.enterprise"     = "ami-04aa2b458e0d67c55"
+    "v10.0-2.1.ap-south-1.byol"           = "ami-0497e825c3e141e1e"
+    "v10.0-2.1.ap-southeast-1.enterprise" = "ami-0a41f5094cd3a40e9"
+    "v10.0-2.1.ap-southeast-1.byol"       = "ami-057541533bfa09aed"
+    "v10.0-2.1.ap-southeast-2.enterprise" = "ami-0f9a0bff08cc6b199"
+    "v10.0-2.1.ap-southeast-2.byol"       = "ami-07d7cb987a959a5eb"
+    "v10.0-2.1.ap-northeast-1.enterprise" = "ami-09a55d5e48d2a1351"
+    "v10.0-2.1.ap-northeast-1.byol"       = "ami-0244b97f9bec76f51"
+    "v10.0-2.1.ap-northeast-2.enterprise" = "ami-0a74dcad4c72fa457"
+    "v10.0-2.1.ap-northeast-2.byol"       = "ami-06b3dfc2d3efe96d3"
+    "v10.0-2.1.sa-east-1.enterprise"      = "ami-056975e34509c0595"
+    "v10.0-2.1.sa-east-1.byol"            = "ami-0e6c2870b6d67e502"
+    "v10.0-2.1.eu-west-2.enterprise"      = "ami-0b650def8b9d17143"
+    "v10.0-2.1.eu-west-2.byol"            = "ami-0a769f4f99a22b4ba"
+    "v10.0-2.1.ca-central-1.enterprise"   = "ami-05bd66d8ba9aadd19"
+    "v10.0-2.1.ca-central-1.byol"         = "ami-08d6648938dfe7b07"
+    "v10.0-2.1.eu-west-3.enterprise"      = "ami-058c46da4557aab01"
+    "v10.0-2.1.eu-west-3.byol"            = "ami-0fcabc1d12a02840f"
+    "v10.0-2.1.us-gov-west-1.enterprise"  = null
+    "v10.0-2.1.us-gov-west-1.byol"        = null
+    // </editor-fold>
+
     // <editor-fold desc="MarkLogic 9.0-9.3 AMIs">
     "v9.0-9.3.us-east-1.enterprise"      = "ami-0c47fb9f2fd80d605"
     "v9.0-9.3.us-east-1.byol"            = "ami-0e039c2bef4b3d333"
@@ -73,7 +108,7 @@ variable "amis" {
     "v9.0-9.1.us-gov-west-1.byol"        = null
     // </editor-fold>
 
-    // <editor-fold desc="MarkLogic "9.0-8" AMIs">
+    // <editor-fold desc="MarkLogic 9.0-8 AMIs">
     "v9.0-8.us-east-1.enterprise"      = "ami-0cd873f9b5dbbe54c"
     "v9.0-8.us-east-1.byol"            = "ami-0d77ce6990428613f"
     "v9.0-8.us-east-2.enterprise"      = "ami-0e04f31930f7f8d05"
