@@ -5,13 +5,13 @@ variable "bastion_instance_type" {
 
 variable "bastion_key_name" {
   description = "name of the key used to access the bastion EC2 instances"
-  type        = "string"
+  type        = string
   default     = ""
 }
 
 variable "bastion_remote_access_cidr_blocks" {
   description = "Allowed CIDR blocks for external SSH access to the bastions"
-  type = "list"
+  type = list(string)
   default = [
     "0.0.0.0/0"
   ]
@@ -19,7 +19,7 @@ variable "bastion_remote_access_cidr_blocks" {
 
 variable "bastion_egress_cidr_blocks" {
   description = "Allowed CIDR blocks for egress from the bastion"
-  type = "list"
+  type = list(string)
   default = [
     "0.0.0.0/0"
   ]
@@ -27,7 +27,7 @@ variable "bastion_egress_cidr_blocks" {
 
 variable "bastion_tenancy" {
   description = "The tenancy of the ingestion instance: default, dedicated, host."
-  type = "string"
+  type = string
   default = "default"
 }
 

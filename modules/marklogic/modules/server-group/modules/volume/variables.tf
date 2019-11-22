@@ -1,10 +1,10 @@
 variable "enable" {
-  type    = "string"
+  type    = string
   default = true
 }
 
 variable "group_number" {
-  type    = "string"
+  type    = string
   default = 1
 }
 
@@ -12,15 +12,15 @@ variable "availability_zone" {
 }
 
 variable "node_count" {
-  type    = "string"
+  type    = string
   default = 1
 }
 variable "cluster_name" {
-  type    = "string"
+  type    = string
 }
 
 variable "cluster_id" {
-  type    = "string"
+  type    = string
 }
 
 variable "volume_size" {

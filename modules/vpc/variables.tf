@@ -4,8 +4,7 @@ variable "aws_region" {
 }
 
 variable "azs" {
-  type = "list"
-
+  type = list(string)
   default = [
     "us-east-1a",
     "us-east-1b",
@@ -14,11 +13,11 @@ variable "azs" {
 }
 
 variable "vpc_name" {
-  type    = "string"
+  type    = string
 }
 
 variable "vpc_cidr" {
-  type    = "string"
+  type    = string
   default = "10.0.0.0/16"
 }
 
@@ -27,8 +26,7 @@ variable "number_of_zones" {
 }
 
 variable "private_subnet_cidrs" {
-  type = "list"
-
+  type = list(string)
   default = [
     "10.0.0.0/23",
     "10.0.32.0/23",
@@ -37,8 +35,7 @@ variable "private_subnet_cidrs" {
 }
 
 variable "public_subnet_cidrs" {
-  type = "list"
-
+  type = list(string)
   default = [
     "10.0.96.0/23",
     "10.0.128.0/23",

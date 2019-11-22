@@ -1,23 +1,23 @@
 variable "vpc_cidr" {
-  type    = "string"
+  type    = string
   default = "10.0.0.0/16"
 }
 
 # Only used with existing VPCs
 variable "vpc_id" {
-  type = "string"
+  type = string
   default = null
 }
 
 # Only used with existing VPCs
 variable "public_subnet_ids" {
-  type = "list"
+  type = list(string)
   default = []
 }
 
 # Only used with existing VPCs
 variable "private_subnet_ids" {
-  type = "list"
+  type = list(string)
   default = []
 }
 

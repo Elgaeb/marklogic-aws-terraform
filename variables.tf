@@ -1,10 +1,10 @@
 variable "access_key" {
-  type    = "string"
+  type    = string
   default = ""
 }
 
 variable "secret_key" {
-  type    = "string"
+  type    = string
   default = ""
 }
 
@@ -19,8 +19,7 @@ variable "aws_region" {
 }
 
 variable "azs" {
-  type = "list"
-
+  type = list(string)
   default = [
     "us-east-1a",
     "us-east-1b",

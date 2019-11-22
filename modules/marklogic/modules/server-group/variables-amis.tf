@@ -1,6 +1,6 @@
 variable "amis" {
   description = "MarkLogic AMIs by region"
-  type        = "map"
+  type        = map(string)
 
   default = {
     // <editor-fold desc="MarkLogic 10.0-2.1 AMIs">
