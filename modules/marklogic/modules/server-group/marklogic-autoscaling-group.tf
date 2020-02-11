@@ -50,6 +50,19 @@ resource "aws_launch_configuration" "launch_configuration" {
 resource "aws_autoscaling_group" "marklogic_server_group" {
   count = var.enable ? 1 : 0
 
+  depends_on = [
+    module.volume_0.volume_ids,
+    module.volume_1.volume_ids,
+    module.volume_2.volume_ids,
+    module.volume_3.volume_ids,
+    module.volume_4.volume_ids,
+    module.volume_5.volume_ids,
+    module.volume_6.volume_ids,
+    module.volume_7.volume_ids,
+    module.volume_8.volume_ids,
+    module.volume_9.volume_ids,
+  ]
+
   name = "${var.cluster_name}-marklogic_server_group_${var.group_number}"
 
   vpc_zone_identifier = [
