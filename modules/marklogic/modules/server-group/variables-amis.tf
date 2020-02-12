@@ -3,6 +3,40 @@ variable "amis" {
   type        = map(string)
 
   default = {
+    // <editor-fold desc="MarkLogic 10.0-3 AMIs">
+    "v10.0-3.us-east-1.enterprise"      = "ami-08bde30b7728b773c"
+    "v10.0-3.us-east-1.byol"            = "ami-0a89489a18c15493d"
+    "v10.0-3.us-east-2.enterprise"      = "ami-0232f94a147187569"
+    "v10.0-3.us-east-2.byol"            = "ami-01d15f077ed94438c"
+    "v10.0-3.us-west-1.enterprise"      = "ami-08e32f0223963d22f"
+    "v10.0-3.us-west-1.byol"            = "ami-0219a3c826714a65a"
+    "v10.0-3.us-west-2.enterprise"      = "ami-0370cee9c1c2d2046"
+    "v10.0-3.us-west-2.byol"            = "ami-0c27c3b5f896e297a"
+    "v10.0-3.eu-central-1.enterprise"   = "ami-0141fdbda2662ea6c"
+    "v10.0-3.eu-central-1.byol"         = "ami-0ca626355eed1258e"
+    "v10.0-3.eu-west-1.enterprise"      = "ami-0da04d4cc332cb09a"
+    "v10.0-3.eu-west-1.byol"            = "ami-05cc544ba6bec0451"
+    "v10.0-3.ap-south-1.enterprise"     = "ami-03df88db26f87a9fd"
+    "v10.0-3.ap-south-1.byol"           = "ami-085e17bb4ac2b2d48"
+    "v10.0-3.ap-southeast-1.enterprise" = "ami-0d048c93c4ea1c699"
+    "v10.0-3.ap-southeast-1.byol"       = "ami-041f7e5ed8c733fda"
+    "v10.0-3.ap-southeast-2.enterprise" = "ami-0f575ad2081a65c11"
+    "v10.0-3.ap-southeast-2.byol"       = "ami-0422b257d0a45c1db"
+    "v10.0-3.ap-northeast-1.enterprise" = "ami-083569a68138c36fb"
+    "v10.0-3.ap-northeast-1.byol"       = "ami-0ef3661fb348d4105"
+    "v10.0-3.ap-northeast-2.enterprise" = "ami-03e3cac31a9f3e042"
+    "v10.0-3.ap-northeast-2.byol"       = "ami-010a8db965dac38d0"
+    "v10.0-3.sa-east-1.enterprise"      = "ami-07d7e31894ae8e0d5"
+    "v10.0-3.sa-east-1.byol"            = "ami-04a546a9d226bd122"
+    "v10.0-3.eu-west-2.enterprise"      = "ami-09a7851f4bb16fa63"
+    "v10.0-3.eu-west-2.byol"            = "ami-01fc3b3bc2679ce15"
+    "v10.0-3.ca-central-1.enterprise"   = "ami-017740cf6337af37a"
+    "v10.0-3.ca-central-1.byol"         = "ami-05f88dd42f74bd436"
+    "v10.0-3.eu-west-3.enterprise"      = "ami-0eb17b12d06de3e06"
+    "v10.0-3.eu-west-3.byol"            = "ami-09acf0e900303b6d2"
+    // </editor-fold>
+
+
     // <editor-fold desc="MarkLogic 10.0-2.1 AMIs">
     "v10.0-2.1.us-east-1.enterprise"      = "ami-072ec2a77547f9ea5"
     "v10.0-2.1.us-east-1.byol"            = "ami-0ade534db8b60a808"

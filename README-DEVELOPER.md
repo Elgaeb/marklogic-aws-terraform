@@ -12,7 +12,7 @@
 
 [MarkLogic 9.0-9.3](https://s3.amazonaws.com/marklogic-lambda-us-east-1/9.0-9.3/node_manager.zip)
 
-[MarkLogic 10.0-2.1](https://s3.amazonaws.com/marklogic-lambda-us-east-1/10.0-2.1/node_manager.zip)
+[MarkLogic 10.0-3](https://s3.amazonaws.com/marklogic-lambda-us-east-1/10.0-3/node_manager.zip)
 
 
 ## Regular Expression for MarkLogic AMIs
