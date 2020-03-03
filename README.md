@@ -130,10 +130,11 @@ All configuration can be achieved through [input variables](https://learn.hashic
 
 Upgrading marklogic is fairly straightforward:
 
-1. In your Terraform variables, change the version of MarkLogic to de desired, supported version, e.g. `marklogic_version = "9.0-9.3"`. Currently supported versions include:
+1. In your Terraform variables, change the version of MarkLogic to the desired, supported version, e.g. `marklogic_version = "10.0-3"`. Currently supported versions include:
     * 9.0-8
     * 9.0-9.1
     * 9.0-9.3
+    * 10.0-3
 2. Run `terraform apply`
 3. For a rolling upgrade (and as a good practice) terminate other nodes one by one starting with the node that has the Security database. They will come up and reconnect without any UI interaction.
 4. Go to 8001 port on any new instance where an upgrade prompt should be displayed.
