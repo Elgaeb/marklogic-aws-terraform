@@ -9,7 +9,7 @@ variable "enable" {
 }
 
 variable "vpc_security_group_ids" {
-  type = "list"
+  type = list(string)
 }
 
 variable "associate_public_ip_address" {
@@ -17,11 +17,11 @@ variable "associate_public_ip_address" {
 }
 
 variable "subnet_id" {
-  type = "string"
+  type = string
 }
 
 variable "instance_name" {
-  type = "string"
+  type = string
 }
 
 variable "instance_type" {
@@ -34,21 +34,21 @@ variable "instance_os" {
 }
 
 variable "iam_instance_profile" {
-  type = "string"
+  type = string
 }
 
 variable "root_block_device_type" {
-  type = "string"
+  type = string
   default = "gp2"
 }
 
 variable "root_block_device_size" {
-  type = "string"
+  type = string
   default = 8
 }
 
 variable "root_block_device_iops" {
-  type = "string"
+  type = string
   default = null
 }
 
@@ -57,12 +57,12 @@ variable "ebs_volume_size" {
 }
 
 variable "ebs_volume_type" {
-  type = "string"
+  type = string
   default = "gp2"
 }
 
 variable "ebs_volume_iops" {
-  type = "string"
+  type = string
   default = null
 }
 
@@ -71,7 +71,7 @@ variable "ebs_encrypted" {
 }
 
 variable "ebs_device_names" {
-  type = "list"
+  type = list(string)
   default = [
     "/dev/sdf",
     "/dev/sdg",
@@ -94,14 +94,13 @@ variable "tenancy" {
 
 variable "key_name" {
   description = "name of the key used to access the bastion EC2 instances"
-  type        = "string"
+  type        = string
   default     = ""
 }
 
 variable "amis" {
   description = "AMIs by region"
-  type        = "map"
-
+  type        = map(string)
   default = {
     "us-east-1.amazon-linux-hvm"      = "ami-0ff8a91507f77f867"
     "us-east-2.amazon-linux-hvm"      = "ami-0b59bfac6be064b78"

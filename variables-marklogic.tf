@@ -1,69 +1,69 @@
 variable "licensee" {
-  type    = "string"
+  type    = string
   default = "none"
 }
 
 variable "licensee_key" {
-  type    = "string"
+  type    = string
   default = "none"
 }
 
 variable "marklogic_admin_password" {
-  type = "string"
+  type = string
   default = "admin"
 }
 
 variable "marklogic_version" {
-  type    = "string"
+  type    = string
   default = "9.0-9.3"
 }
 
 variable "instance_type" {
-  type    = "string"
+  type    = string
   default = "r5.4xlarge"
 }
 
 variable "key_name" {
   description = "name of the key used to access the EC2 instances"
-  type        = "string"
+  type        = string
   default     = ""
 }
 
 variable "volume_size" {
   description = "The size of the EBS volumes in GB"
-  type    = "string"
+  type    = string
   default = 10
 }
 
 variable "volume_type" {
   description = "The EBS volume type: standard, gp2, or io1"
-  type    = "string"
+  type    = string
   default = "gp2"
 }
 
 variable "volume_iops" {
   description = "For io1 volumes only, the provisioned IOP (PIOP)"
-  type = "string"
+  type = string
   default = ""
 }
 
 variable "volume_count" {
   description = "The number of volumes per node to use for MarkLogic data"
-  type = "string"
+  type = string
   default = 1
 }
 
 variable "volume_encrypted" {
-  type = "string"
+  type = string
   default = "false"
 }
 
 variable "cluster_name" {
-  type    = "string"
+  type    = string
 }
 
 variable "cluster_id" {
-  type    = "string"
+  type    = string
 }
 
 variable "nodes_per_zone" {
@@ -72,22 +72,22 @@ variable "nodes_per_zone" {
 
 variable "log_sns_arn" {
   description = "ARN of SNS Topic for logging - optional/advanced"
-  type = "string"
+  type = string
   default = ""
 }
 
 variable "lambda_package_bucket_base" {
-  type    = "string"
+  type    = string
   default = "marklogic-lambda-"
 }
 
 variable "template_url_base" {
-  type    = "string"
+  type    = string
   default = "https://s3.amazonaws.com/marklogic-releases"
 }
 
 variable "s3_directory_base" {
-  type    = "string"
+  type    = string
   default = "9.0-9.3"
 }
 
@@ -127,12 +127,12 @@ variable "enable_marklogic" {
 }
 
 variable "data_explorer_port" {
-  type = "string"
+  type = string
   default = "7777"
 }
 
 variable "grove_port" {
-  type = "string"
+  type = string
   default = "8063"
 }
 

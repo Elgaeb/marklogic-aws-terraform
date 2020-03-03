@@ -66,7 +66,7 @@ resource "aws_elb" "internal_elb" {
   // <editor-fold desc="Listeners">
 
   dynamic "listener" {
-    for_each = local.external_ports
+    for_each = local.internal_ports
 
     content {
       instance_port     = listener.value.instance_port
@@ -83,10 +83,18 @@ resource "aws_elb" "internal_elb" {
 }
 
 resource "aws_app_cookie_stickiness_policy" "internal_elb_csp" {
-  count = length(local.external_http_ports)
+  count = length(local.internal_http_ports)
 
   name          = format("%s-internal-elb-csp-%d", var.cluster_name, local.internal_http_ports[count.index].lb_port)
   load_balancer = aws_elb.internal_elb.name
   lb_port       = local.internal_http_ports[count.index].lb_port
   cookie_name   = "SessionID"
 }
+
+//output "internal_ports" {
+//  value = local.internal_ports
+//}
+//
+//output "internal_http_ports" {
+//  value = local.internal_http_ports
+//}

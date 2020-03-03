@@ -1,14 +1,14 @@
 variable "marklogic_admin_password" {
-  type = "string"
+  type = string
 }
 
 variable "enable" {
-  type    = "string"
+  type    = string
   default = true
 }
 
 variable "group_number" {
-  type    = "string"
+  type    = string
   default = 1
 }
 
@@ -16,20 +16,20 @@ variable "availability_zone" {
 }
 
 variable "node_count" {
-  type    = "string"
+  type    = string
   default = 1
 }
 
 variable "subnet_id" {
-  type    = "string"
+  type    = string
 }
 
 variable "cluster_name" {
-  type    = "string"
+  type    = string
 }
 
 variable "cluster_id" {
-  type    = "string"
+  type    = string
 }
 
 variable "volume_size" {
@@ -57,28 +57,28 @@ variable "volume_count" {
 }
 
 variable "licensee" {
-  type    = "string"
+  type    = string
   default = "none"
 }
 
 variable "licensee_key" {
-  type    = "string"
+  type    = string
   default = "none"
 }
 
 variable "marklogic_version" {
-  type    = "string"
+  type    = string
   default = "9.0-9.3"
 }
 
 variable "instance_type" {
-  type    = "string"
+  type    = string
   default = "r5.4xlarge"
 }
 
 variable "key_name" {
   description = "name of the key used to access the EC2 instances"
-  type        = "string"
+  type        = string
   default     = ""
 }
 
@@ -96,18 +96,18 @@ variable "aws_region" {
 }
 
 variable "load_balancer_names" {
-  type = "list"
+  type = list(string)
 }
 
 variable "node_manager_sns_topic_arn" {
-  type = "string"
+  type = string
 }
 
 variable "node_manager_exec_role_arn" {
-  type = "string"
+  type = string
 }
 
 variable "create_after" {
-  type = "list"
+  type = list(any)
   default = []
 }
