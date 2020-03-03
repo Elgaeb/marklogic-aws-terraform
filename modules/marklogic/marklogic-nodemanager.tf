@@ -1,7 +1,7 @@
 resource "aws_dynamodb_table" "marklogic_ddb_table" {
-  count = "${var.enable_marklogic ? 1 : 0}"
+  count = var.enable_marklogic ? 1 : 0
 
-  name = "${var.cluster_name}"
+  name = var.cluster_name
 
   attribute {
     name = "node"
@@ -91,7 +91,7 @@ resource "aws_iam_role_policy_attachment" "node_manager_policy_attachment" {
 }
 
 resource "aws_lambda_function" "node_manager_function" {
-  count = "${var.enable_marklogic ? 1 : 0}"
+  count = var.enable_marklogic ? 1 : 0
 
   depends_on = [
     aws_dynamodb_table.marklogic_ddb_table

@@ -1,20 +1,20 @@
 variable "licensee" {
-  type    = "string"
+  type    = string
   default = "none"
 }
 
 variable "licensee_key" {
-  type    = "string"
+  type    = string
   default = "none"
 }
 
 variable "marklogic_admin_password" {
-  type = "string"
+  type = string
 }
 
 variable "marklogic_version" {
-  type    = "string"
-  default = "9.0-9.3"
+  type    = string
+  default = "10.0-2.1"
 }
 
 variable "aws_region" {
@@ -23,8 +23,7 @@ variable "aws_region" {
 }
 
 variable "availability_zones" {
-  type = "list"
-
+  type = list(string)
   default = [
     "us-east-1a",
     "us-east-1b",
@@ -33,42 +32,42 @@ variable "availability_zones" {
 }
 
 variable "instance_type" {
-  type    = "string"
+  type    = string
   default = "r5.4xlarge"
 }
 
 variable "key_name" {
   description = "name of the key used to access the EC2 instances"
-  type        = "string"
+  type        = string
   default     = ""
 }
 
 variable "cluster_name" {
-  type    = "string"
+  type    = string
 }
 
 variable "cluster_id" {
-  type    = "string"
+  type    = string
 }
 
 variable "log_sns_arn" {
   description = "ARN of SNS Topic for logging - optional/advanced"
-  type = "string"
+  type = string
   default = ""
 }
 
 variable "lambda_package_bucket_base" {
-  type    = "string"
+  type    = string
   default = "marklogic-lambda-"
 }
 
 variable "template_url_base" {
-  type    = "string"
+  type    = string
   default = "https://s3.amazonaws.com/marklogic-releases"
 }
 
 variable "s3_directory_base" {
-  type    = "string"
+  type    = string
   default = "9.0-9.3"
 }
 
@@ -108,28 +107,28 @@ variable "enable_marklogic" {
 }
 
 variable "vpc_cidr" {
-  type    = "string"
+  type    = string
 }
 
 variable "vpc_id" {
-  type = "string"
+  type = string
 }
 
 variable "public_subnet_ids" {
-  type = "list"
+  type = list(string)
 }
 
 variable "private_subnet_ids" {
-  type = "list"
+  type = list(string)
 }
 
 variable "data_explorer_port" {
-  type = "string"
+  type = string
   default = "7777"
 }
 
 variable "grove_port" {
-  type = "string"
+  type = string
   default = "8063"
 }
 

@@ -5,7 +5,7 @@ variable "ingestion_instance_type" {
 
 variable "ingestion_key_name" {
   description = "name of the key used to access the ingestion EC2 instances"
-  type        = "string"
+  type        = string
   default     = ""
 }
 
@@ -14,13 +14,13 @@ variable "ingestion_volume_size" {
 }
 
 variable "ingestion_volume_type" {
-  type = "string"
+  type = string
   default = "gp2"
 }
 
 variable "ingestion_tenancy" {
   description = "The tenancy of the ingestion instance: default, dedicated, host."
-  type = "string"
+  type = string
   default = "default"
 }
 

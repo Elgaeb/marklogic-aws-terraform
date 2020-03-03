@@ -12,7 +12,7 @@ cluster_id     = "random-string"
 
 # The marklogic version to use and license information. If both licensee and license_key are set to "none" this cluster
 # will use a developer license. If the are both set to "" (the empty string) it will use MarkLogic Enterprise Edition.
-marklogic_version = "9.0-9.3"
+marklogic_version = "10.0-2.1"
 licensee     = "none"
 licensee_key = "none"
 marklogic_admin_password = "admin"
@@ -63,9 +63,9 @@ server_group_0_instance_type = "t3.small"
 server_group_0_volume_size = 600
 # The type of EBS volume, e.g. "gp2" or "io1"
 server_group_0_volume_type = "gp2"
-# The provisioned IOPS, only used when the volume type is "io1"
+# The provisioned IOPS, only used when the volume type is "io1". Default is 100.
 # server_group_0_volume_iops = 100
-# The number of EBS volumes to attach to the instances.
+# The number of EBS volumes to attach to the instances. Default is 1.
 //server_group_0_volume_count = 1
 # Whether to use EBS encryption for the provisioned volumes.
 server_group_0_volume_encrypted = false

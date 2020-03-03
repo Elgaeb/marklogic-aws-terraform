@@ -22,7 +22,7 @@ resource "aws_ebs_volume" "marklogic_volume" {
 
   lifecycle {
     ignore_changes = [
-      "tags"
+      tags
     ]
   }
 

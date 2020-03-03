@@ -8,7 +8,7 @@ Licensing, either Essential Enterprise or BYOL is also configurable.
 
 ## Requirements
 
-* Terraform 0.12+
+* [Terraform](https://www.terraform.io) v0.12.16+
 * AWS Credentials with an access key and secret key
     * You will need a comprehensive set of permissions to run these scripts, including the ability to create IAM roles
 * An SSH key associated with your AWS account.
@@ -83,9 +83,9 @@ vpc_cidr = 10.0.0.0/16
 vpc_id = vpc-08558c6fad5ce588f
 ```
 
-To access the administration col=nsole, visit the url specified by `marklogic.url`, you can change the port to access the other services (e.g. 8000 for query console.)
+To access the administration console, visit the url specified by `marklogic.url`, you can change the port to access the other services (e.g. 8000 for query console.)
 
-If you want to SSH to your marklogic servers, you will need to first SSH to the bastino server using the command `ssh ec2-user@ec2-54-167-34-23.compute-1.amazonaws.com`, replacing the server with the appropriate dns name or ip for you bastion server. You also need to add your SSH key using the `ssh-add` command, e.g. `ssh-add ~/.ssh/my-key.pem`
+If you want to SSH to your marklogic servers, you will need to first SSH to the bastion server using the command `ssh ec2-user@ec2-server.compute-1.amazonaws.com`, replacing the server with the appropriate dns name or ip for you bastion server. You also need to add your SSH key using the `ssh-add` command, e.g. `ssh-add ~/.ssh/my-key.pem`
 
 When you are finished, you can run `terraform destroy` to permanently remove the cluster (and vpc.)    
 

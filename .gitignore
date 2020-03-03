@@ -1,6 +1,37 @@
+# Ignore all dot-files
 .*
-!.gitignore
+
+# Specifically include the dot-files we want to keep
+!.*ignore
+!.*rc
+!.*rc.json
+!.editorconfig
+!.env
+!.gitattributes
+!.gitmodules
+
+node_modules/
+
+# Terraform files we don't want to commit
 terraform.tfvars
 backend.tf
 *.tfstate*
+
+
+# Build directories for various tools
+build/
+dist/
+target/
+coverage/
+
+# IDE artifacts
 *.iml
+
+**.lock
+**.bin
+**.log*
+
+package-lock.json
+
+# Unversioned Gradle files
+gradle-local.properties

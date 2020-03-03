@@ -3,9 +3,9 @@ terraform {
 }
 
 provider "aws" {
-  access_key = "${var.access_key}"
-  secret_key = "${var.secret_key}"
-  region     = "${var.aws_region}"
+  access_key = var.access_key
+  secret_key = var.secret_key
+  region     = var.aws_region
 
   version = "~> 2.11"
 }
@@ -75,7 +75,7 @@ module "ingestion" {
   subnet_id = local.private_subnet_ids[0]
   instance_name = "${var.cluster_name}-ingestion"
   instance_type = var.ingestion_instance_type
-  iam_instance_profile = aws_iam_instance_profile.ingestion_host_profile[0].name
+  iam_instance_profile = var.ingestion_enable ? element(aws_iam_instance_profile.ingestion_host_profile, 0).name : ""
 
   ebs_volume_size = var.ingestion_volume_size
   ebs_volume_type = var.ingestion_volume_type
