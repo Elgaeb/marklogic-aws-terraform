@@ -72,6 +72,39 @@ variable "amis" {
     "v10.0-2.1.us-gov-west-1.byol"        = null
     // </editor-fold>
 
+    // <editor-fold desc="MarkLogic 10.0-2.1 AMIs">
+    "v10.0-1.us-east-1.enterprise"  = "ami-0ac019c39cac73c89"
+    "v10.0-1.us-east-1.byol"	= "ami-0ea837234c4c34363"
+    "v10.0-1.us-east-2.enterprise"	= "ami-04a12854191a13598"
+    "v10.0-1.us-east-2.byol"	= "ami-064a52b106d703e95"
+    "v10.0-1.us-west-1.enterprise"	= "ami-03e26454a0467260b"
+    "v10.0-1.us-west-1.byol"	= "ami-055e79ea1dfe9bbbe"
+    "v10.0-1.us-west-2.enterprise"	= "ami-02ef9bed5ba506f1d"
+    "v10.0-1.us-west-2.byol"	= "ami-03c7c175abb66d3b6"
+    "v10.0-1.eu-central-1.enterprise"	= "ami-022a0caaf9f11373d"
+    "v10.0-1.eu-central-1.byol"	= "ami-01ab6f1d51c0b4468"
+    "v10.0-1.eu-west-1.enterprise"	= "ami-051ee31e10ba0bdab"
+    "v10.0-1.eu-west-1.byol"	= "ami-060fd630c85814af2"
+    "v10.0-1.ap-south-1.enterprise"	= "ami-012f367ee8a0db5c9"
+    "v10.0-1.ap-south-1.byol"	= "ami-081563b3e7c3b89fa"
+    "v10.0-1.ap-southeast-1.enterprise"	= "ami-06e61a8a08a11f8cc"
+    "v10.0-1.ap-southeast-1.byol"	= "ami-07016ac9cb73cb378"
+    "v10.0-1.ap-southeast-2.enterprise"	= "ami-00a20b1ab84175504"
+    "v10.0-1.ap-southeast-2.byol"	= "ami-028f3c7e8621413e8"
+    "v10.0-1.ap-northeast-1.enterprise"	= "ami-0a2788d3e6623b6cd"
+    "v10.0-1.ap-northeast-1.byol"	= "ami-0ab5f8f75ab1f78a8"
+    "v10.0-1.ap-northeast-2.enterprise"	= "ami-056eb302dff17109f"
+    "v10.0-1.ap-northeast-2.byol"	= "ami-029bdb1e9ac3d8263"
+    "v10.0-1.sa-east-1.enterprise"	= "ami-0da5e718b806460c4"
+    "v10.0-1.sa-east-1.byol"	= "ami-0b2ae39de3c28c9cf"
+    "v10.0-1.eu-west-2.enterprise"	= "ami-040c2fbe7312fef0b"
+    "v10.0-1.eu-west-2.byol"	= "ami-09a2360870f519792"
+    "v10.0-1.ca-central-1.enterprise"	= "ami-0df9061e4de340b68"
+    "v10.0-1.ca-central-1.byol"	= "ami-07f889af9d0bbfb57"
+    "v10.0-1.eu-west-3.enterprise"	= "ami-0dce77e59a26b5327"
+    "v10.0-1.eu-west-3.byol"	= "ami-01fa2a870cf1b32f5"
+    // </editor-fold>
+
     // <editor-fold desc="MarkLogic 9.0-9.3 AMIs">
     "v9.0-9.3.us-east-1.enterprise"      = "ami-0c47fb9f2fd80d605"
     "v9.0-9.3.us-east-1.byol"            = "ami-0e039c2bef4b3d333"

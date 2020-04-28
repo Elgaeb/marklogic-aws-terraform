@@ -18,9 +18,10 @@
 ## Regular Expression for MarkLogic AMIs
 
 ```regexp
-^\s*([\w-]+)\s*:\s*(\w+)\s*:\s*(ami-\w+)$
+^\s*([\w-]+)\s*:[\n\r]+\s*(\w+)\s*:\s*(ami-\w+)[\n\r]+\s*(\w+)\s*:\s*(ami-\w+)$$
 ```
 
 ```
-"v10.0-2.1.$1.$2"\t= "$3"
+"v10.0-1.$1.enterprise"\t= "$3"\n"v10.0-1.$1.byol"\t= "$5"
 ```
+https://marklogic-releases.s3.amazonaws.com/10.0-latest/mlcluster.template
