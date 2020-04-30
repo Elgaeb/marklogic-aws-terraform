@@ -3,6 +3,40 @@ variable "amis" {
   type        = map(string)
 
   default = {
+    // <editor-fold desc="MarkLogic 10.0-4 AMIs">
+    "v10.0-4.us-east-1.enterprise" = "ami-0c763e06dd7324d55"
+    "v10.0-4.us-east-1.byol" = "ami-0b08f9840dc6d5f9b"
+    "v10.0-4.us-east-2.enterprise" = "ami-024c23747c733da56"
+    "v10.0-4.us-east-2.byol" = "ami-0fcf29f28c09cee9c"
+    "v10.0-4.us-west-1.enterprise" = "ami-004f919fa30f9f554"
+    "v10.0-4.us-west-1.byol" = "ami-039293a34c1074839"
+    "v10.0-4.us-west-2.enterprise" = "ami-031db5353e68026a1"
+    "v10.0-4.us-west-2.byol" = "ami-07d59166cf3e8fce0"
+    "v10.0-4.eu-central-1.enterprise" = "ami-0a9161ef2f978c2d1"
+    "v10.0-4.eu-central-1.byol" = "ami-0e7bc252505a327f9"
+    "v10.0-4.eu-west-1.enterprise" = "ami-0073e2e69eba615b1"
+    "v10.0-4.eu-west-1.byol" = "ami-0672305e2466111bf"
+    "v10.0-4.ap-south-1.enterprise" = "ami-070e1076216c4b478"
+    "v10.0-4.ap-south-1.byol" = "ami-0fa05a0d71f8ff199"
+    "v10.0-4.ap-southeast-1.enterprise" = "ami-0a1f0a7a86e21df51"
+    "v10.0-4.ap-southeast-1.byol" = "ami-02c727762312f3afe"
+    "v10.0-4.ap-southeast-2.enterprise" = "ami-0b9ff5f80a7713b1d"
+    "v10.0-4.ap-southeast-2.byol" = "ami-0b1e23c4ab4b967da"
+    "v10.0-4.ap-northeast-1.enterprise" = "ami-096e04aab25d8436b"
+    "v10.0-4.ap-northeast-1.byol" = "ami-0455595c16c332205"
+    "v10.0-4.ap-northeast-2.enterprise" = "ami-0b689e5bd5d6f16d8"
+    "v10.0-4.ap-northeast-2.byol" = "ami-0f526a6ee68bfa25b"
+    "v10.0-4.sa-east-1.enterprise" = "ami-0e154412d1ca51fa0"
+    "v10.0-4.sa-east-1.byol" = "ami-0ea579ca64d4236d8"
+    "v10.0-4.eu-west-2.enterprise" = "ami-0f54aefe8ea3ced8c"
+    "v10.0-4.eu-west-2.byol" = "ami-06d176f766dcadb43"
+    "v10.0-4.ca-central-1.enterprise" = "ami-0f2e74798c55c5a2d"
+    "v10.0-4.ca-central-1.byol" = "ami-09f1d25c19776efb7"
+    "v10.0-4.eu-west-3.enterprise" = "ami-00ad7835b12989a3d"
+    "v10.0-4.eu-west-3.byol" = "ami-0603d40fb43f74ebf"
+    // </editor-fold>
+
+
     // <editor-fold desc="MarkLogic 10.0-3 AMIs">
     "v10.0-3.us-east-1.enterprise"      = "ami-08bde30b7728b773c"
     "v10.0-3.us-east-1.byol"            = "ami-0a89489a18c15493d"
